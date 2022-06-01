@@ -1,0 +1,21 @@
+<div>
+  <h4 class="px-10 font-weight-bold">Filters</h4>
+  <section class="filter-section" *ngFor="let filter of filters; let index=index">
+    <span class="filter-list-section">
+      <mat-checkbox class="mx-12" [checked]="filter.selected" [color]="filter.color" [indeterminate]="someComplete(index)"
+        (change)="setAll($event.checked, index)">
+        {{filter.name}}
+      </mat-checkbox>
+    </span>
+    <span class="example-list-section">
+      <ul class="ml-40">
+        <li *ngFor="let option of filter.options">
+          <mat-checkbox [(ngModel)]="option.selected" [color]="option.color"
+            (ngModelChange)="updateAllComplete(index)">
+            {{option.name}}
+          </mat-checkbox>
+        </li>
+      </ul>
+    </span>
+  </section>
+</div>

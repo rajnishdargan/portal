@@ -1,0 +1,36 @@
+<mat-toolbar>
+  <button mat-button color="primary" (click)="navigationService.goBack()">
+    <mat-icon>arrow_back</mat-icon>&nbsp;Back
+  </button>
+</mat-toolbar>
+
+<div class="d-flex">
+  <div class="left-content">
+    <app-filter [filters]="filters" (filterChange)="onFilterChange($event)"></app-filter>
+  </div>
+  <div class="right-content">
+    <div class="container">
+      <h2 class="my-20 mat-h2">Choose a content to play</h2>
+
+      <div *ngIf="filteredList.mcq.length">
+        <h3 class="mb-10 mat-h3 text-center font-weight-bold">Multiple Choice Questions</h3>
+        <div class="content-box">
+          <div class="common-contribution-card" *ngFor="let content of filteredList.mcq" (click)="playContent(content)">
+            <h4 class="content-title">{{content?.name}}</h4>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="filteredList.sa.length">
+        <h3 class="text-center my-10 mat-h3">Subjective Questions</h3>
+        <div class="content-box mb-20">
+          <div class="common-contribution-card" *ngFor="let content of filteredList.sa" (click)="playContent(content)">
+            <h4 class="content-title">{{content?.name}}</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h4 class="text-center" *ngIf="!filteredList.mcq.length && !filteredList.sa.length">Content not available!</h4>
+  </div>
+</div>

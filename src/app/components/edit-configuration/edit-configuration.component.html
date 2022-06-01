@@ -1,0 +1,61 @@
+<button mat-icon-button class="close-button" [mat-dialog-close]="true">
+  <mat-icon class="close-icon" color="warn">close</mat-icon>
+</button>
+
+<h2 mat-dialog-title color="primary">Edit the player configurations</h2>
+<form [formGroup]="editConfigForm" (ngSubmit)="onSubmit()">
+  <mat-dialog-content>
+    <h3>Use below form to edit the configurations, the player will take effect accordingly</h3>
+    <div class="row">
+      <div class="column mr-12">
+        <h4 class="field-label">Show Question Feedback</h4>
+        <mat-form-field appearance="fill">
+          <mat-label>Choose Option</mat-label>
+          <mat-select formControlName="showFeedback" name="showFeedback">
+            <mat-option value="Yes">Yes</mat-option>
+            <mat-option value="No">No</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="column">
+        <h4 class="field-label">Show Submit Confirmation Page</h4>
+        <mat-form-field appearance="fill">
+          <mat-label>Choose Option</mat-label>
+          <mat-select formControlName="showSubmitConfirmation" name="showSubmitConfirmation">
+            <mat-option value="Yes">Yes</mat-option>
+            <mat-option value="No">No</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="column mr-12">
+        <h4 class="field-label">Choose Summary Type</h4>
+        <mat-form-field appearance="fill">
+          <mat-label>Choose Option</mat-label>
+          <mat-select formControlName="summaryType" name="summaryType">
+            <mat-option *ngFor="let option of summaryTypeOptions" [value]="option.value">{{option.label}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="column">
+        <h4 class="field-label">Show Timer</h4>
+        <!--should take care of adding time-->
+        <mat-form-field appearance="fill">
+          <mat-label>Choose Option</mat-label>
+          <mat-select formControlName="showTimer" name="showTimer">
+            <mat-option value="Yes">Yes</mat-option>
+            <mat-option value="No">No</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-flat-button [mat-dialog-close]="editConfigForm.value" cdkFocusInitial color="primary"
+      type="submit">Submit</button>
+  </mat-dialog-actions>
+</form>
