@@ -1,0 +1,82 @@
+main {
+  margin: 25px 10px;
+  .container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  .card {
+    box-sizing: border-box;
+    border: 0.5px solid var(--color-primary);
+    border-radius: 0.25rem;
+    background-color: var(--color-white);
+    box-shadow: none;
+    width: 170px;
+    height: 170px;
+    margin: 10px;
+  }
+  // .card {
+  //   margin: 10px;
+  //   padding: 10px;
+  //   width: 400px;
+  //   min-height: 50px;
+  //   display: flex;
+  //   // flex-direction: column;
+  //   background-color: var(--color-primary);
+  //   color: var(--color-white);
+  //   font-weight: bold;
+  //   border-radius: 5px;
+  //   justify-content: center;
+  //   align-items: center;
+  //   cursor: pointer;
+  // }
+  h1 {
+    text-align: center;
+  }
+
+  //Common contribution card section
+  .common-contribution-card {
+    box-sizing: border-box;
+    border: 0.5px solid rgba(123, 134, 244, 0.39);
+    border-radius: 0.25rem;
+    background-color: #fff;
+    box-shadow: none;
+    width: 170px;
+    height: 170px;
+    margin: 10px;
+    cursor: pointer;
+    .content {
+      img {
+        width: 64px;
+        height: 64px;
+      }
+      .content-title {
+        font-size: 14px;
+        color: gray;
+        vertical-align: middle;
+        line-height: 20px;
+      }
+    }
+    &:hover,
+    &.active {
+      .content .icon {
+        display: block;
+      }
+    }
+    ​ &:hover,
+    &.active {
+      cursor: pointer;
+      z-index: 5;
+      background: #fff;
+      transform: translateY(-3px);
+      box-shadow: 0 2px 8px 0 rgba(123, 134, 244, 0.31);
+      border: 0.5px solid rgba(208, 208, 208, 0.48);
+    }
+    &.active {
+      .content-title {
+        font-weight: 700;
+      }
+    }
+  }
+}

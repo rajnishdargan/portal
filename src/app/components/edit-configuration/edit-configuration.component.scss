@@ -1,0 +1,21 @@
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.field-label {
+  font-weight: bold;
+}
+
+.close-button{
+  float: right;
+  top:-24px;
+  right:-24px;
+}

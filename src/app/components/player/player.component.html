@@ -1,0 +1,14 @@
+<mat-toolbar>
+  <button mat-button color="primary" (click)="navigationService.goBack()">
+    <mat-icon>arrow_back</mat-icon>&nbsp;Back
+  </button>
+  <span class="spacer"></span>
+  <button mat-flat-button color="accent" (click)="openDialog()">
+    <mat-icon>edit</mat-icon>&nbsp;Edit Player Configurations
+  </button>
+</mat-toolbar>
+<div class="middle-section-set">
+  <section *ngIf="playerConfig" class="aspectratio" data-ratio="16:9">
+    <quml-main-player [playerConfig]="playerConfig"></quml-main-player>
+  </section>
+</div>

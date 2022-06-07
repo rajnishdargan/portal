@@ -1,0 +1,21 @@
+.logo {
+  font-size: 32px;
+  cursor: pointer;
+
+  img {
+    height: 64px;
+    width: 160px;
+  }
+}
+.spacer {
+  flex: 1 1 auto;
+}
+
+a.mat-button:hover {
+  color: #fff;
+}
+
+.router-link-active {
+  background-color: #014b74;
+  color: white;
+}
