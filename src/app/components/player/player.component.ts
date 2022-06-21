@@ -21,6 +21,7 @@ export class PlayerComponent implements OnInit {
     summaryType: '',
     showTimer: '',
   };
+  showPortrait = false;
   constructor(
     private questionSetService: QuestionCursorImplementationService,
     private activatedRoute: ActivatedRoute,
@@ -113,5 +114,12 @@ export class PlayerComponent implements OnInit {
 
     this.setConfig();
     this.changeConfig();
+  }
+
+  switchToPortraitMode() {
+    this.showPortrait = true;
+  }
+  switchToLandscapeMode() {
+    this.showPortrait = false;
   }
 }

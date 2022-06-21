@@ -6,31 +6,6 @@ main {
     justify-content: center;
     align-items: center;
   }
-  .card {
-    box-sizing: border-box;
-    border: 0.5px solid var(--color-primary);
-    border-radius: 0.25rem;
-    background-color: var(--color-white);
-    box-shadow: none;
-    width: 170px;
-    height: 170px;
-    margin: 10px;
-  }
-  // .card {
-  //   margin: 10px;
-  //   padding: 10px;
-  //   width: 400px;
-  //   min-height: 50px;
-  //   display: flex;
-  //   // flex-direction: column;
-  //   background-color: var(--color-primary);
-  //   color: var(--color-white);
-  //   font-weight: bold;
-  //   border-radius: 5px;
-  //   justify-content: center;
-  //   align-items: center;
-  //   cursor: pointer;
-  // }
   h1 {
     text-align: center;
   }

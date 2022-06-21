@@ -9,3 +9,9 @@ footer {
   background-color: #0288D1;
   color: #fff;
 }
+@media(max-width:767px){
+  footer{
+    position: fixed;
+    bottom: 0;
+  }
+} 

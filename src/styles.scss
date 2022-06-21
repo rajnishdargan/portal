@@ -1,23 +1,40 @@
 /* You can add global styles to this file, and also import other style files */
-
-:root {
-  --color-primary: teal;
-  --color-white: #fff;
-}
-
-* {
+​ * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
-html,
+​ html,
 body {
   height: 100%;
   box-sizing: border-box;
 }
-
-body {
+​ body {
   position: relative;
   font-family: "Poppins", sans-serif;
+}
+​ .quml-header__metadata--portrait {
+  bottom: 55px !important;
+}
+@media (max-width: 768px) {
+  .quml-header__metadata--portrait {
+    display: flex !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    padding: 0.5rem 1rem !important;
+    background-color: var(--white) !important;
+    z-index: 5 !important;
+    min-height: 3rem !important;
+  }
+}
+@media (min-width: 320px) {
+  .portrait-mode .quml-navigation {
+    position: absolute;
+    bottom: -565px;
+    right: 31px;
+  }
+  .portrait-mode .endPage-container-height {
+    height: 50% !important;
+  }
 }
