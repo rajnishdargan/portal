@@ -3,14 +3,14 @@ import { Router } from '@angular/router';
 import { HelperService } from '../../services/helper/helper.service';
 import * as _ from 'lodash-es';
 @Component({
-  selector: 'app-questionset-list',
-  templateUrl: './questionset-list.component.html',
-  styleUrls: ['./questionset-list.component.scss']
+  selector: 'app-questionset-draft',
+  templateUrl: './questionset-draft.component.html',
+  styleUrls: ['./questionset-draft.component.scss']
 })
-export class QuestionsetListComponent implements OnInit {
+export class QuestionsetDraftComponent implements OnInit {
   questionsetList: any;
   constructor(
-    private router: Router,
+    public router: Router,
     public helperService: HelperService) { }
 
   ngOnInit(): void {
@@ -18,11 +18,7 @@ export class QuestionsetListComponent implements OnInit {
   }
 
   navigateToQuestionset(id): void {
-    this.router.navigate(['/questionset-editor', id]);
-  }
-
-  navigatetoHome(): void {
-    this.router.navigate(['/']);
+    this.router.navigate(['/edit/questionset/', id]);
   }
 
   getAllQuestionsetList(): void {

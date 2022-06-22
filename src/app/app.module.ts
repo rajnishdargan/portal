@@ -31,7 +31,9 @@ import { FilterComponent } from './components/filter/filter.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { RouterModule } from '@angular/router';
 import { EditorCursorImplementationService } from './editor-cursor-implementation.service';
-import { QuestionsetListComponent } from './components/questionset-list/questionset-list.component';
+import { QuestionsetDraftComponent } from './components/questionset-draft/questionset-draft.component';
+import { QuestionsetComponent } from './components/questionset/questionset.component';
+import { QuestionsetCreateComponent } from './components/questionset-create/questionset-create.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +45,9 @@ import { QuestionsetListComponent } from './components/questionset-list/question
     EditConfigurationComponent,
     QuestionsetEditorComponent,
     FilterComponent,
-    QuestionsetListComponent
+    QuestionsetDraftComponent,
+    QuestionsetComponent,
+    QuestionsetCreateComponent
   ],
   imports: [
     BrowserModule,

@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/content-list']);
   }
   openEditorPage(): void {
-    this.router.navigate(['/questionset-list']);
+    this.router.navigate(['/questionset']);
   }
 
 }

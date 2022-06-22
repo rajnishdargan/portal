@@ -21,7 +21,7 @@ export class QuestionsetEditorComponent implements OnInit {
   editorEventListener(event): any{
     if (event.action === 'backContent') {
       console.log('editor event', event);
-      this.router.navigate(['/questionset-list']);
+      this.router.navigate(['/questionset']);
     }
   }
 }

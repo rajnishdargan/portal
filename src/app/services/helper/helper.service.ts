@@ -20,4 +20,14 @@ export class HelperService {
       })
     );
   }
+  createContent(reqBody): Observable<any> {
+    console.log(reqBody);
+    const req = {
+      url: 'questionset/v1/create',
+      data: {
+        request: reqBody
+    }
+    };
+    return this.actionService.post(req);
+  }
 }
