@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { QumlPlayerConfig } from '@project-sunbird/sunbird-quml-player-v9/lib/quml-library-interface';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { NavigationService } from 'src/app/services/navigation.service';
 import { QuestionCursorImplementationService } from 'src/app/services/question-cursor-implementation.service';
 import { EditConfigurationComponent } from '../edit-configuration/edit-configuration.component';
@@ -12,7 +14,7 @@ import { SamplePlayerData } from './player-data';
   templateUrl: './player.component.html',
   styleUrls: ['./player.component.scss']
 })
-export class PlayerComponent implements OnInit {
+export class PlayerComponent implements OnInit, OnDestroy {
 
   playerConfig: QumlPlayerConfig;
   editConfig = {
@@ -22,30 +24,43 @@ export class PlayerComponent implements OnInit {
     showTimer: '',
   };
   showPortrait = false;
+  nextContents: { id: string, name: string }[] = [];
+  $unsubscribe: Subject<void> = new Subject<void>();
   constructor(
     private questionSetService: QuestionCursorImplementationService,
     private activatedRoute: ActivatedRoute,
+    private router: Router,
     private dialog: MatDialog,
     public navigationService: NavigationService
   ) { }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe((params: any) => {
+    this.activatedRoute.params.pipe(takeUntil(this.$unsubscribe)).subscribe((params: any) => {
       this.getContent(params.id);
+
+      if (this.navigationService.nextContents.length > 1) {
+        const currentContentIndex = this.navigationService.nextContents.findIndex(content => content.id === params.id);
+        if (currentContentIndex > -1) {
+          this.nextContents = [...this.navigationService.nextContents.slice(currentContentIndex + 1)];
+        }
+      }
     });
   }
 
   getContent(identifier: string): void {
-    this.questionSetService.getQuestionSet(identifier).subscribe(res => {
-      this.initializePlayer(res);
-      this.setConfig();
+    this.questionSetService.getQuestionSet(identifier).pipe(takeUntil(this.$unsubscribe)).subscribe(res => {
+      this.playerConfig = null;
+      setTimeout(() => {
+        this.initializePlayer(res);
+        this.setConfig();
+      });
     });
   }
 
   initializePlayer(metadata): void {
     this.playerConfig = {
       context: SamplePlayerData.playerConfig.context,
-      config: SamplePlayerData.playerConfig.config,
+      config: this.nextContents.length ? { ...SamplePlayerData.playerConfig.config, ...{ nextContent: this.nextContents[0] } } : SamplePlayerData.playerConfig.config,
       metadata,
       data: {}
     };
@@ -73,7 +88,7 @@ export class PlayerComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().pipe(takeUntil(this.$unsubscribe)).subscribe(result => {
       if (result) {
         this.updateConfig(result);
       }
@@ -121,5 +136,16 @@ export class PlayerComponent implements OnInit {
   }
   switchToLandscapeMode() {
     this.showPortrait = false;
+  }
+
+  onPlayerEvent(event) {
+    if (event?.edata?.type === 'NEXT_CONTENT_PLAY') {
+      this.router.navigate(['/player', this.nextContents[0].id]);
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.$unsubscribe.next();
+    this.$unsubscribe.complete();
   }
 }
