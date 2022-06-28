@@ -8,6 +8,7 @@ import { NavigationEnd, Router } from '@angular/router';
 export class NavigationService {
 
   private history: string[] = [];
+  public nextContents = [];
   constructor(private router: Router, private location: Location) { }
 
   public watchHistory() {

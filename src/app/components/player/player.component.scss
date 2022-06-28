@@ -21,3 +21,26 @@
   width: 100%;
   margin: 50px auto;
 }
+.portrait-mode {
+  .b-1-100 {
+    width: 480px;
+    margin: auto;
+  }
+  .player-endpage {
+    height: inherit !important;
+  }
+  .aspectratio {
+    &[data-ratio="16:9"] {
+      padding-top: calc(100% / (9 / 12));
+    }
+  }
+}
+.btn-none {
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  cursor: pointer;
+}
+.opacity-icon {
+  opacity: 0.45 !important;
+}

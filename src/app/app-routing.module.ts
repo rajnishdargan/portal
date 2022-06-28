@@ -9,13 +9,13 @@ import { QuestionsetDraftComponent } from './components/questionset-draft/questi
 import { QuestionsetComponent } from './components/questionset/questionset.component';
 import { UserRolesComponent } from './components/user-roles/user-roles.component';
 import { QuestionsetUpForReviewComponent } from './components/questionset-up-for-review/questionset-up-for-review.component';
+// tslint:disable-next-line:max-line-length
 import { QuestionsetReviewSubmissionsComponent } from './components/questionset-review-submissions/questionset-review-submissions.component';
 import { QuestionsetPublishedComponent } from './components/questionset-published/questionset-published.component';
 const routes: Routes = [
   {
     path: '', component: HomeComponent
   },
-  // { path: 'player', loadChildren: () => import('./modules/player/player.module').then(m => m.PlayerModule) },
   {
     path: 'content-list', component: PlayerContentListComponent
   },
@@ -51,7 +51,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

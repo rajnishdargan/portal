@@ -8,7 +8,20 @@
   </button>
 </mat-toolbar>
 <div class="middle-section-set">
-  <section *ngIf="playerConfig" class="aspectratio" data-ratio="16:9">
-    <quml-main-player [playerConfig]="playerConfig"></quml-main-player>
-  </section>
+  <div class="pb-10 text-right">
+    <button type="button" (click)="switchToLandscapeMode();" class="btn-none">
+      <i class="tv icon sb-color-primary fs-1-143" [ngClass]="{'opacity-icon': showPortrait}"></i>
+    </button>
+    <span class="fs-1-16 font-weight-normal sb-color-gray-100">|</span>
+    <button type="button" (click)="switchToPortraitMode();" class="btn-none">
+      <i class="mobile alternate icon sb-color-primary fs-1-3" [ngClass]="{'opacity-icon': !showPortrait}"></i>
+    </button>
+  </div>
+  <div [ngClass]="{'portrait-mode': showPortrait}">
+    <div class="b-1-100 br-2 mt-5">
+      <section *ngIf="playerConfig" class="aspectratio" data-ratio="16:9" #aspectRatio>
+        <quml-main-player [playerConfig]="playerConfig" (playerEvent)="onPlayerEvent($event)"></quml-main-player>
+      </section>
+    </div>
+  </div>
 </div>

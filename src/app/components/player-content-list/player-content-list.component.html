@@ -15,7 +15,7 @@
       <div *ngIf="filteredList.mcq.length">
         <h3 class="mb-10 mat-h3 text-center font-weight-bold">Multiple Choice Questions</h3>
         <div class="content-box">
-          <div class="common-contribution-card" *ngFor="let content of filteredList.mcq" (click)="playContent(content)">
+          <div class="common-contribution-card" *ngFor="let content of filteredList.mcq" (click)="playContent(content, 'mcq')">
             <h4 class="content-title">{{content?.name}}</h4>
           </div>
         </div>
@@ -24,7 +24,7 @@
       <div *ngIf="filteredList.sa.length">
         <h3 class="text-center my-10 mat-h3">Subjective Questions</h3>
         <div class="content-box mb-20">
-          <div class="common-contribution-card" *ngFor="let content of filteredList.sa" (click)="playContent(content)">
+          <div class="common-contribution-card" *ngFor="let content of filteredList.sa" (click)="playContent(content, 'sa')">
             <h4 class="content-title">{{content?.name}}</h4>
           </div>
         </div>

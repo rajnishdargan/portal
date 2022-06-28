@@ -42,7 +42,8 @@ export class PlayerContentListComponent implements OnInit {
     console.log('Filtered List', this.filteredList);
   }
 
-  playContent(content): void {
+  playContent(content, type: string): void {
+    this.navigationService.nextContents = this.getNextContents(content, type) || [];
     this.router.navigate(['/player', content.id]);
   }
 
@@ -93,6 +94,24 @@ export class PlayerContentListComponent implements OnInit {
     const categoryContents = SampleContentList[type].filter(content => content.category === category)
     if (categoryContents.length) {
       this.filteredList[type] = this.filteredList[type].concat(categoryContents);
+    }
+  }
+
+  getNextContents(currentContent, type: string) {
+    let list = [];
+    if (type === 'mcq' && this.filteredList.mcq.length > 1) {
+      list = this.filteredList.mcq;
+    } else if (type === 'sa' && this.filteredList.sa.length > 1) {
+      list = this.filteredList.sa;
+    } else {
+      return null;
+    }
+
+    const index = list.indexOf(currentContent);
+    if (index === list.length - 1) {
+      return list;
+    } else {
+      return list.slice(index, list.length);
     }
   }
 }
