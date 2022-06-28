@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HelperService } from '../../services/helper/helper.service';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 @Component({
   selector: 'app-questionset-create',
   templateUrl: './questionset-create.component.html',
@@ -13,6 +14,10 @@ export class QuestionsetCreateComponent implements OnInit {
   public helperService: HelperService) { }
 
   ngOnInit(): void {
+    const userRole = JSON.parse(localStorage.getItem('userRole'));
+    if (userRole !== 'creator') {
+      this.router.navigate(['/questionset']);
+    }
   }
 
   createContent(): void {
@@ -21,9 +26,9 @@ export class QuestionsetCreateComponent implements OnInit {
           name: 'Untitled QuestionSet',
           mimeType: 'application/vnd.sunbird.questionset',
           primaryCategory: 'Practice Question Set',
-          createdBy: '5a587cc1-e018-4859-a0a8-e842650b9d64',
-          createdFor: ['01309282781705830427'],
-          framework: 'ekstep_ncert_k-12',
+          createdBy: environment.userDetails.id,
+          createdFor: environment.channel,
+          framework: environment.framework,
           code: '7d5aaa70-ffb8-d062-ba10-1db445a11dbc'
         }
     };
@@ -36,6 +41,6 @@ export class QuestionsetCreateComponent implements OnInit {
   }
 
   navigateToQuestionset(id): void {
-    this.router.navigate(['/edit/questionset/', id]);
+    this.router.navigate(['/edit/questionset/', id, 'draft']);
   }
 }

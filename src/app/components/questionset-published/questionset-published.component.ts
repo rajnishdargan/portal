@@ -4,11 +4,11 @@ import { HelperService } from '../../services/helper/helper.service';
 import * as _ from 'lodash-es';
 import { environment } from '../../../environments/environment';
 @Component({
-  selector: 'app-questionset-draft',
-  templateUrl: './questionset-draft.component.html',
-  styleUrls: ['./questionset-draft.component.scss']
+  selector: 'app-questionset-published',
+  templateUrl: './questionset-published.component.html',
+  styleUrls: ['./questionset-published.component.scss']
 })
-export class QuestionsetDraftComponent implements OnInit {
+export class QuestionsetPublishedComponent implements OnInit {
   questionsetList: any;
   constructor(
     public router: Router,
@@ -19,7 +19,7 @@ export class QuestionsetDraftComponent implements OnInit {
   }
 
   navigateToQuestionset(id): void {
-    this.router.navigate(['/edit/questionset/', id, 'Draft']);
+    this.router.navigate(['/edit/questionset/', id, 'Live']);
   }
 
   getAllQuestionsetList(): void {
@@ -27,7 +27,7 @@ export class QuestionsetDraftComponent implements OnInit {
       request: {
         filters: {
           status: [
-            'Draft'
+            'Live'
           ],
           objectType: 'Questionset',
           channel: environment.channel,
@@ -44,10 +44,10 @@ export class QuestionsetDraftComponent implements OnInit {
     this.helperService.getAllQuestionsetList(req)
       .subscribe((response) => {
         this.questionsetList = _.get(response, 'result.QuestionSet');
-        console.log('questionsetList', this.questionsetList);
       }, (error) => {
         console.log(error);
       });
   }
+
 
 }

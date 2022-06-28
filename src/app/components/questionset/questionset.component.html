@@ -8,11 +8,20 @@
     <div class="left-content">
         <div class="sb-sidebar-menu">
             <h3 class="font-700 mat-h3 mt-10">Question Set</h3>
-            <ul>
+            <ul *ngIf="userRole === 'creator'">
                 <li class="active mb-0" [class.active]="this.router.isActive('/questionset/create')" (click)="nagivateToPage('create')">Create</li>
             </ul>
-            <ul>
+            <ul *ngIf="userRole === 'creator'">
                 <li class="active mb-0" [class.active]="this.router.isActive('/questionset/draft')" (click)="nagivateToPage('draft')">Drafts</li>
+            </ul>
+            <ul *ngIf="userRole === 'reviewer'">
+                <li class="active mb-0" [class.active]="this.router.isActive('/questionset/upForReview')" (click)="nagivateToPage('upForReview')">Up For Review</li>
+            </ul>
+            <ul *ngIf="userRole === 'creator'">
+                <li class="active mb-0" [class.active]="this.router.isActive('/questionset/review')" (click)="nagivateToPage('review')">Submitted For Review</li>
+            </ul>
+            <ul *ngIf="userRole === 'creator'">
+                <li class="active mb-0" [class.active]="this.router.isActive('/questionset/published')" (click)="nagivateToPage('published')">Published</li>
             </ul>
         </div>
     </div>

@@ -9,9 +9,14 @@ export class QuestionsetComponent implements OnInit {
 
   constructor(private router: Router) { }
   page: string;
+  public userRole: string;
   ngOnInit(): void {
-    // this.page = 'create';
-    this.router.navigate(['/questionset/create']);
+    this.userRole = JSON.parse(localStorage.getItem('userRole'));
+    if (this.userRole === 'creator') {
+      this.router.navigate(['/questionset/create']);
+    } else {
+      this.router.navigate(['/questionset/upForReview']);
+    }
   }
 
   nagivateToPage(page): void {
@@ -22,11 +27,19 @@ export class QuestionsetComponent implements OnInit {
       case 'draft':
         this.router.navigate(['/questionset/draft']);
         break;
+      case 'upForReview':
+        this.router.navigate(['/questionset/upForReview']);
+        break;
+      case 'review':
+        this.router.navigate(['/questionset/review']);
+        break;
+      case 'published':
+        this.router.navigate(['/questionset/published']);
+        break;
       default:
-        this.router.navigate(['/questionset']);
+        this.router.navigate(['/']);
         break;
     }
-    // this.page = page;
   }
 
   navigatetoHome(): void {

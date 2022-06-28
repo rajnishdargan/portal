@@ -34,6 +34,10 @@ import { EditorCursorImplementationService } from './editor-cursor-implementatio
 import { QuestionsetDraftComponent } from './components/questionset-draft/questionset-draft.component';
 import { QuestionsetComponent } from './components/questionset/questionset.component';
 import { QuestionsetCreateComponent } from './components/questionset-create/questionset-create.component';
+import { UserRolesComponent } from './components/user-roles/user-roles.component';
+import { QuestionsetUpForReviewComponent } from './components/questionset-up-for-review/questionset-up-for-review.component';
+import { QuestionsetReviewSubmissionsComponent } from './components/questionset-review-submissions/questionset-review-submissions.component';
+import { QuestionsetPublishedComponent } from './components/questionset-published/questionset-published.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +51,11 @@ import { QuestionsetCreateComponent } from './components/questionset-create/ques
     FilterComponent,
     QuestionsetDraftComponent,
     QuestionsetComponent,
-    QuestionsetCreateComponent
+    QuestionsetCreateComponent,
+    UserRolesComponent,
+    QuestionsetUpForReviewComponent,
+    QuestionsetReviewSubmissionsComponent,
+    QuestionsetPublishedComponent
   ],
   imports: [
     BrowserModule,

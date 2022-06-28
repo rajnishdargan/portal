@@ -7,6 +7,10 @@ import { QuestionsetCreateComponent } from './components/questionset-create/ques
 import {QuestionsetEditorComponent } from './components/questionset-editor/questionset-editor.component';
 import { QuestionsetDraftComponent } from './components/questionset-draft/questionset-draft.component';
 import { QuestionsetComponent } from './components/questionset/questionset.component';
+import { UserRolesComponent } from './components/user-roles/user-roles.component';
+import { QuestionsetUpForReviewComponent } from './components/questionset-up-for-review/questionset-up-for-review.component';
+import { QuestionsetReviewSubmissionsComponent } from './components/questionset-review-submissions/questionset-review-submissions.component';
+import { QuestionsetPublishedComponent } from './components/questionset-published/questionset-published.component';
 const routes: Routes = [
   {
     path: '', component: HomeComponent
@@ -26,15 +30,24 @@ const routes: Routes = [
       },
       {
         path: 'draft', component: QuestionsetDraftComponent
+      },
+      {
+        path: 'upForReview', component: QuestionsetUpForReviewComponent
+      },
+      {
+        path: 'review', component: QuestionsetReviewSubmissionsComponent
+      },
+      {
+        path: 'published', component: QuestionsetPublishedComponent
       }
     ]
   },
   {
-    path: 'edit/questionset/:id', component: QuestionsetEditorComponent
+    path: 'edit/questionset/:id/:status', component: QuestionsetEditorComponent
   },
   {
     path: '**', redirectTo: ''
-  },
+  }
 ];
 
 @NgModule({
