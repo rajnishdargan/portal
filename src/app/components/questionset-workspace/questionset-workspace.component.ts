@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 @Component({
-  selector: 'app-questionset',
-  templateUrl: './questionset.component.html',
-  styleUrls: ['./questionset.component.scss']
+  selector: 'app-questionset-workspace',
+  templateUrl: './questionset-workspace.component.html',
+  styleUrls: ['./questionset-workspace.component.scss']
 })
-export class QuestionsetComponent implements OnInit {
+export class QuestionsetWorkspaceComponent implements OnInit {
 
   constructor(private router: Router) { }
   page: string;

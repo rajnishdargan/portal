@@ -32,7 +32,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { RouterModule } from '@angular/router';
 import { EditorCursorImplementationService } from './editor-cursor-implementation.service';
 import { QuestionsetDraftComponent } from './components/questionset-draft/questionset-draft.component';
-import { QuestionsetComponent } from './components/questionset/questionset.component';
+import { QuestionsetWorkspaceComponent } from './components/questionset-workspace/questionset-workspace.component';
 import { QuestionsetCreateComponent } from './components/questionset-create/questionset-create.component';
 import { UserRolesComponent } from './components/user-roles/user-roles.component';
 import { QuestionsetUpForReviewComponent } from './components/questionset-up-for-review/questionset-up-for-review.component';
@@ -50,7 +50,7 @@ import { QuestionsetPublishedComponent } from './components/questionset-publishe
     QuestionsetEditorComponent,
     FilterComponent,
     QuestionsetDraftComponent,
-    QuestionsetComponent,
+    QuestionsetWorkspaceComponent,
     QuestionsetCreateComponent,
     UserRolesComponent,
     QuestionsetUpForReviewComponent,

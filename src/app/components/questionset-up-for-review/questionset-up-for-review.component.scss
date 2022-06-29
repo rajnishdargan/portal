@@ -1,86 +1,13 @@
-.left-content {
-    width: 20%;
-    background-color: #f3f8ff;
-    padding: 12px 0 0 12px;
-    height: calc(100vh - 178px);
-  }
-  .right-content {
-    width: 80%;
-    background-color: #fff;
-    height: calc(100vh - 178px);
-  }
-  .container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    .content-box {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-  }
-  //Common contribution card section
-  .common-contribution-card {
-    box-sizing: border-box;
-    border: 0.5px solid rgba(123, 134, 244, 0.39);
-    border-radius: 0.25rem;
-    background-color: #fff;
-    box-shadow: none;
-    width: 200px;
-    height: 200px;
-    margin: 10px;
-    position: relative;
-
-    .content-title {
-      font-size: 14px;
-      color: gray;
-      vertical-align: middle;
-      line-height: 20px;
-      width: 100%;
-      text-align: center;
-      top: 45%;
-      position: absolute;
-      margin-bottom: 0;
-      font-weight: 600;
-    }
-
-    &:hover,
-    &.active {
-      cursor: pointer;
-      z-index: 5;
-      background: #fff;
-      transform: translateY(-3px);
-      box-shadow: 0 2px 8px 0 rgba(123, 134, 244, 0.31);
-      border: 0.5px solid rgba(208, 208, 208, 0.48);
-    }
-  }
-  .mat-h2,
-  .mat-h3 {
-    font-weight: 700;
-  }
-
-  .sb-sidebar-menu ul li.active{
-    background-color: #fff;
-  }
-
-  .sb-sidebar-menu ul li{
-    font-size: 14px;
-  }
-
-  .sb-table {
-    width: 100%;
-    background: var(--white);
-    border: .0625rem solid var(--gray-100);
-    box-shadow: none;
-    border-radius: .25rem .25rem 0 0;
-    text-align: left;
-    color: var(--gray);
-    border-collapse: separate;
-    border-spacing: 0;
+.sb-table {
+  width: 100%;
+  background: var(--white);
+  border: .0625rem solid var(--gray-100);
+  box-shadow: none;
+  border-radius: .25rem .25rem 0 0;
+  text-align: left;
+  color: var(--gray);
+  border-collapse: separate;
+  border-spacing: 0;
 }
 
 .sb-table thead th {
@@ -88,6 +15,7 @@
   padding: 1rem;
   background-color: var(--gray-0);
 }
+
 .sb-table tbody td {
   font-size: .875rem;
   padding: 1rem;
@@ -96,15 +24,3 @@
   border-bottom: .0625rem solid var(--gray-100);
 }
 
-.create-new {
-  padding: 6px;
-  background-color: #008840de;
-  border: 1px;
-  border-radius: 5px;
-  color: white;
-  cursor: pointer;
-  font-size: 14px;
-  width: 102px;
-  margin-bottom: 23px;
-  margin-left: 10px;
-}

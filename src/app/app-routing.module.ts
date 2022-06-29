@@ -6,7 +6,7 @@ import { PlayerComponent } from './components/player/player.component';
 import { QuestionsetCreateComponent } from './components/questionset-create/questionset-create.component';
 import {QuestionsetEditorComponent } from './components/questionset-editor/questionset-editor.component';
 import { QuestionsetDraftComponent } from './components/questionset-draft/questionset-draft.component';
-import { QuestionsetComponent } from './components/questionset/questionset.component';
+import { QuestionsetWorkspaceComponent } from './components/questionset-workspace/questionset-workspace.component';
 import { UserRolesComponent } from './components/user-roles/user-roles.component';
 import { QuestionsetUpForReviewComponent } from './components/questionset-up-for-review/questionset-up-for-review.component';
 // tslint:disable-next-line:max-line-length
@@ -23,7 +23,7 @@ const routes: Routes = [
     path: 'player/:id', component: PlayerComponent
   },
   {
-    path: 'questionset', component: QuestionsetComponent,
+    path: 'questionset', component: QuestionsetWorkspaceComponent,
     children: [
       {
         path: 'create', component: QuestionsetCreateComponent

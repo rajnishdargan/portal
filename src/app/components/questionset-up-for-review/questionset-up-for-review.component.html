@@ -1,20 +1,20 @@
 <div class="px-30 mt-20">
-    <div class="sb-table-container" *ngIf="questionsetList?.length">
-      <table class="sb-table sb-table-hover">
-        <thead>
-          <tr>
-            <th>Questionset Name</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let questionset of questionsetList" (click)="navigateToQuestionset(questionset.identifier)">
-            <td>{{questionset?.name}}</td>
-            <td>{{questionset?.status}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  
-    <h4 class="text-center" *ngIf="!questionsetList?.length">Questionset not available!</h4>
+  <div class="sb-table-container" *ngIf="questionsetList?.length">
+    <table class="sb-table sb-table-hover">
+      <thead>
+        <tr>
+          <th>Questionset Name</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let questionset of questionsetList" (click)="navigateToQuestionset(questionset.identifier)">
+          <td>{{questionset?.name}}</td>
+          <td>{{questionset?.status}}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+
+  <h4 class="text-center" *ngIf="!questionsetList?.length">Questionset not available!</h4>
+</div>

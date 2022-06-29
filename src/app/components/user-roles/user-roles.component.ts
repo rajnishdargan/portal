@@ -18,8 +18,4 @@ export class UserRolesComponent implements OnInit {
     this.router.navigate(['/questionset']);
     this.dialogRef.close();
   }
-
-  getAllUsersByRoleType(): void {
-  }
-
 }
