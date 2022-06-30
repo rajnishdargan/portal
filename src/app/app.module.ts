@@ -38,6 +38,7 @@ import { UserRolesComponent } from './components/user-roles/user-roles.component
 import { QuestionsetUpForReviewComponent } from './components/questionset-up-for-review/questionset-up-for-review.component';
 import { QuestionsetReviewSubmissionsComponent } from './components/questionset-review-submissions/questionset-review-submissions.component';
 import { QuestionsetPublishedComponent } from './components/questionset-published/questionset-published.component';
+import { AuthGuard } from './services/auth-guard/auth-guard.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -85,7 +86,8 @@ import { QuestionsetPublishedComponent } from './components/questionset-publishe
     {
       provide: EditorCursor,
       useExisting: EditorCursorImplementationService
-    }
+    },
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

@@ -12,6 +12,7 @@ import { QuestionsetUpForReviewComponent } from './components/questionset-up-for
 // tslint:disable-next-line:max-line-length
 import { QuestionsetReviewSubmissionsComponent } from './components/questionset-review-submissions/questionset-review-submissions.component';
 import { QuestionsetPublishedComponent } from './components/questionset-published/questionset-published.component';
+import { AuthGuard } from './services/auth-guard/auth-guard.service';
 const routes: Routes = [
   {
     path: '', component: HomeComponent
@@ -26,19 +27,19 @@ const routes: Routes = [
     path: 'questionset', component: QuestionsetWorkspaceComponent,
     children: [
       {
-        path: 'create', component: QuestionsetCreateComponent
+        path: 'create', component: QuestionsetCreateComponent, canActivate: [AuthGuard], data: { roles: 'creator' }
       },
       {
-        path: 'draft', component: QuestionsetDraftComponent
+        path: 'draft', component: QuestionsetDraftComponent, canActivate: [AuthGuard], data: { roles: 'creator' }
       },
       {
-        path: 'upForReview', component: QuestionsetUpForReviewComponent
+        path: 'upForReview', component: QuestionsetUpForReviewComponent, canActivate: [AuthGuard],  data: { roles: 'reviewer' }
       },
       {
-        path: 'review', component: QuestionsetReviewSubmissionsComponent
+        path: 'review', component: QuestionsetReviewSubmissionsComponent, canActivate: [AuthGuard],  data: { roles: 'creator' }
       },
       {
-        path: 'published', component: QuestionsetPublishedComponent
+        path: 'published', component: QuestionsetPublishedComponent, canActivate: [AuthGuard],  data: { roles: 'creator' }
       }
     ]
   },

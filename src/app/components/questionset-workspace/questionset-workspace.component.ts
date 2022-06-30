@@ -14,8 +14,11 @@ export class QuestionsetWorkspaceComponent implements OnInit {
     this.userRole = JSON.parse(localStorage.getItem('userRole'));
     if (this.userRole === 'creator') {
       this.router.navigate(['/questionset/create']);
-    } else {
+    }
+    else if (this.userRole === 'reviewer'){
       this.router.navigate(['/questionset/upForReview']);
+    } else {
+      this.router.navigate(['/']);
     }
   }
 
