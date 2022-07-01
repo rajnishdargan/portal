@@ -1,0 +1,72 @@
+.left-content {
+  width: 20%;
+  background-color: #f3f8ff;
+  padding: 12px 0 0 12px;
+  height: calc(100vh - 178px);
+}
+
+.right-content {
+  width: 80%;
+  background-color: #fff;
+  height: calc(100vh - 178px);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .content-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+}
+
+.mat-h2,
+.mat-h3 {
+  font-weight: 700;
+}
+
+.sb-sidebar-menu ul li.active {
+  background-color: #fff;
+  color: #0288D1;
+}
+
+.sb-sidebar-menu ul li {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.sb-sidebar-menu ul li:hover {
+  background-color: #fff;
+}
+
+.sb-table {
+  width: 100%;
+  background: var(--white);
+  border: .0625rem solid var(--gray-100);
+  box-shadow: none;
+  border-radius: .25rem .25rem 0 0;
+  text-align: left;
+  color: var(--gray);
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.sb-table thead th {
+  font-size: .875rem;
+  padding: 1rem;
+  background-color: var(--gray-0);
+}
+
+.sb-table tbody td {
+  font-size: .875rem;
+  padding: 1rem;
+  color: var(--gray);
+  height: 3.5rem;
+  border-bottom: .0625rem solid var(--gray-100);
+}

@@ -1,0 +1,27 @@
+<mat-toolbar>
+    <button mat-button color="primary" (click)="navigatetoHome()">
+        <mat-icon>arrow_back</mat-icon>&nbsp;Back
+    </button>
+    <!-- <span>
+        User Role: {{userRole| uppercase}}
+    </span> -->
+</mat-toolbar>
+
+<div class="d-flex">
+    <div class="left-content">
+        <div class="sb-sidebar-menu">
+            <h3 class="font-700 mat-h3 mt-10">Question Set</h3>
+            <ul *ngIf="userRole === 'creator'">
+                <li class="active mb-0" [class.active]="this.router.isActive('/questionset/create')"
+                    (click)="nagivateToPage('create')">Create</li>
+            </ul>
+            <ul>
+                <li class="active mb-0" [class.active]="this.router.isActive('/questionset/questionset-list')"
+                    (click)="nagivateToPage('questionset-list')">questionset-list</li>
+            </ul>
+        </div>
+    </div>
+    <div class="right-content">
+        <router-outlet></router-outlet>
+    </div>
+</div>

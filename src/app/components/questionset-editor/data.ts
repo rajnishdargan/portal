@@ -131,7 +131,7 @@ export const questionSetEditorConfig = {
       showAddCollaborator: false,
       enableBulkUpload: true,
       publicStorageAccount: 'https://dockstorage.blob.core.windows.net/',
-      hideSubmitForReviewBtn: true,
+      hideSubmitForReviewBtn: false,
       children: {
         Question: [
           'Multiple Choice Question',

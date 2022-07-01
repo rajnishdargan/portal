@@ -1,0 +1,64 @@
+.common-contribution-card {
+  box-sizing: border-box;
+  border: 0.5px solid rgba(123, 134, 244, 0.39);
+  border-radius: 0.25rem;
+  background-color: #fff;
+  box-shadow: none;
+  width: 170px;
+  height: 170px;
+  margin: 10px;
+  cursor: pointer;
+
+  .content {
+    img {
+      width: 64px;
+      height: 64px;
+    }
+
+    .content-title {
+      font-size: 14px;
+      color: gray;
+      vertical-align: middle;
+      line-height: 20px;
+    }
+  }
+
+  &:hover,
+  &.active {
+    .content .icon {
+      display: block;
+    }
+  }
+
+  ​ &:hover,
+  &.active {
+    cursor: pointer;
+    z-index: 5;
+    background: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 2px 8px 0 rgba(123, 134, 244, 0.31);
+    border: 0.5px solid rgba(208, 208, 208, 0.48);
+  }
+
+  &.active {
+    .content-title {
+      font-weight: 700;
+    }
+  }
+}
+
+.text-primary {
+  color: #2196f3
+}
+
+.mat-icon-xl {
+  font-size: 64px;
+  padding-top: 18px;
+  width: 64px;
+  height: 64px;
+}
+
+.font-16 {
+  font-size: 16px !important;
+  line-height: 42px;
+}

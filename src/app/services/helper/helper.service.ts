@@ -9,7 +9,7 @@ export class HelperService {
 
   constructor(private actionService: ActionService) { }
 
-  getAllQuestionsetList(requestData: object): Observable<any> {
+  getQuestionsetList(requestData: object): Observable<any> {
     const req = {
       url: 'composite/v3/search',
       data: requestData
@@ -19,5 +19,14 @@ export class HelperService {
         return response;
       })
     );
+  }
+  createContent(reqBody): Observable<any> {
+    const req = {
+      url: 'questionset/v1/create',
+      data: {
+        request: reqBody
+    }
+    };
+    return this.actionService.post(req);
   }
 }
