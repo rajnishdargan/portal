@@ -27,7 +27,7 @@ export class QuestionsetCreateComponent implements OnInit {
           mimeType: 'application/vnd.sunbird.questionset',
           primaryCategory: 'Practice Question Set',
           createdBy: environment.userDetails.id,
-          createdFor: environment.channel,
+          createdFor: [environment.channel],
           framework: environment.framework,
           code: '7d5aaa70-ffb8-d062-ba10-1db445a11dbc'
         }

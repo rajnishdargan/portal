@@ -9,7 +9,7 @@ export class HelperService {
 
   constructor(private actionService: ActionService) { }
 
-  getAllQuestionsetList(requestData: object): Observable<any> {
+  getQuestionsetList(requestData: object): Observable<any> {
     const req = {
       url: 'composite/v3/search',
       data: requestData

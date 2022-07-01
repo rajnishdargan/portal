@@ -15,14 +15,14 @@ export class QuestionsetUpForReviewComponent implements OnInit {
     public helperService: HelperService) { }
 
   ngOnInit(): void {
-    this.getAllQuestionsetList();
+    this.getUpForReviewQuestionsets();
   }
 
   navigateToQuestionset(id): void {
     this.router.navigate(['/edit/questionset/', id, 'Review']);
   }
 
-  getAllQuestionsetList(): void {
+  getUpForReviewQuestionsets(): void {
     const req = {
       request: {
         filters: {
@@ -30,7 +30,6 @@ export class QuestionsetUpForReviewComponent implements OnInit {
             'Review'
           ],
           objectType: 'Questionset',
-          channel: environment.channel,
           createdBy: environment.userDetails.id
         },
         offset: 0,
@@ -41,7 +40,7 @@ export class QuestionsetUpForReviewComponent implements OnInit {
         }
       }
     };
-    this.helperService.getAllQuestionsetList(req)
+    this.helperService.getQuestionsetList(req)
       .subscribe((response) => {
         this.questionsetList = _.get(response, 'result.QuestionSet');
       }, (error) => {

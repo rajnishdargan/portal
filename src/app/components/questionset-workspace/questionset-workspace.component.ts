@@ -11,7 +11,9 @@ export class QuestionsetWorkspaceComponent implements OnInit {
   page: string;
   public userRole: string;
   ngOnInit(): void {
-    this.userRole = JSON.parse(localStorage.getItem('userRole'));
+    if (localStorage.getItem('userRole')) {
+      this.userRole = JSON.parse(localStorage.getItem('userRole'));
+    }
     if (this.userRole === 'creator') {
       this.router.navigate(['/questionset/create']);
     }

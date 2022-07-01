@@ -9,9 +9,9 @@ import * as _ from 'lodash-es';
 })
 export class QuestionsetEditorComponent implements OnInit {
 
+  public editorConfig: any = questionSetEditorConfig;
   constructor(
     public router: Router, private activatedRoute: ActivatedRoute) { }
-  public editorConfig: any = questionSetEditorConfig;
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: any) => {
@@ -22,16 +22,13 @@ export class QuestionsetEditorComponent implements OnInit {
 
   editorEventListener(event): any{
     if (event.action === 'backContent') {
-      console.log('editor event', event);
       this.router.navigate(['/questionset']);
     }
   }
 
-  // tslint:disable-next-line:typedef
-  private getEditorMode(status) {
+  getEditorMode(status): string {
     const contentStatus = _.toLower(status);
-    if (contentStatus === 'draft' || contentStatus === 'flagdraft'
-        || contentStatus === 'unlisted') {
+    if (contentStatus === 'draft') {
       return 'edit';
     }
 

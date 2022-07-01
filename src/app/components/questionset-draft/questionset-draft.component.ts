@@ -15,14 +15,14 @@ export class QuestionsetDraftComponent implements OnInit {
     public helperService: HelperService) { }
 
   ngOnInit(): void {
-    this.getAllQuestionsetList();
+    this.getDraftQuestionsets();
   }
 
   navigateToQuestionset(id): void {
     this.router.navigate(['/edit/questionset/', id, 'Draft']);
   }
 
-  getAllQuestionsetList(): void {
+  getDraftQuestionsets(): void {
     const req = {
       request: {
         filters: {
@@ -30,7 +30,6 @@ export class QuestionsetDraftComponent implements OnInit {
             'Draft'
           ],
           objectType: 'Questionset',
-          channel: environment.channel,
           createdBy: environment.userDetails.id
         },
         offset: 0,
@@ -41,7 +40,7 @@ export class QuestionsetDraftComponent implements OnInit {
         }
       }
     };
-    this.helperService.getAllQuestionsetList(req)
+    this.helperService.getQuestionsetList(req)
       .subscribe((response) => {
         this.questionsetList = _.get(response, 'result.QuestionSet');
         console.log('questionsetList', this.questionsetList);

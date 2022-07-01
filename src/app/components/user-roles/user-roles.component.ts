@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-user-roles',
   templateUrl: './user-roles.component.html',
@@ -14,8 +14,10 @@ export class UserRolesComponent implements OnInit {
   }
 
   nagivateToWorkspace(role): void {
-    localStorage.setItem('userRole', JSON.stringify(role));
-    this.router.navigate(['/questionset']);
-    this.dialogRef.close();
+    if (role) {
+      localStorage.setItem('userRole', JSON.stringify(role));
+      this.router.navigate(['/questionset']);
+      this.dialogRef.close();
+    }
   }
 }
