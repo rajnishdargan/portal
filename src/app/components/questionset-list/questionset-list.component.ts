@@ -9,6 +9,7 @@ import * as _ from 'lodash-es';
 })
 export class QuestionsetListComponent implements OnInit {
   questionsetList: any;
+  userRole: string;
   constructor(
     private router: Router,
     public helperService: HelperService) { }
@@ -17,40 +18,58 @@ export class QuestionsetListComponent implements OnInit {
     this.getAllQuestionsetList();
   }
 
-  navigateToQuestionset(id): void {
-    this.router.navigate(['/questionset-editor', id]);
-  }
-
   navigatetoHome(): void {
     this.router.navigate(['/']);
   }
 
   getAllQuestionsetList(): void {
+    const creatorStatus = [
+      'Draft',
+      'FlagDraft',
+      'Review',
+      'flagged',
+      'Live',
+      'Unlisted',
+      'FlagReview'
+    ];
+    const reviewerStatus = ['Review', 'FlagReview'];
+    let QuestionSetStatus = [];
+    if (localStorage.getItem('userRole')) {
+      this.userRole = JSON.parse(localStorage.getItem('userRole'));
+    }
+    if (this.userRole === 'creator') {
+      QuestionSetStatus = creatorStatus;
+    }
+    if (this.userRole === 'reviewer'){
+      QuestionSetStatus = reviewerStatus;
+    }
     const req = {
       request: {
         filters: {
-          status: [
-            'Draft'
-          ],
+          status: QuestionSetStatus,
           objectType: 'Questionset',
           channel: '01309282781705830427',
           createdBy: '5a587cc1-e018-4859-a0a8-e842650b9d64'
         },
         offset: 0,
-        limit: 5,
+        limit: 200,
         query: '',
         sort_by: {
           lastUpdatedOn: 'desc'
         }
       }
     };
-    this.helperService.getAllQuestionsetList(req)
+    this.helperService.getQuestionsetList(req)
       .subscribe((response) => {
         this.questionsetList = _.get(response, 'result.QuestionSet');
         console.log('questionsetList', this.questionsetList);
       }, (error) => {
         console.log(error);
       });
+  }
+
+  navigateToQuestionset(id, status): void {
+    this.router.navigate(['/edit/questionset/', id, status]);
   }
 
 }
