@@ -3,7 +3,7 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     proxy = require('express-http-proxy'),
     urlHelper = require('url');
-const latexService = require('./latexService.js')
+// const latexService = require('./latexService.js')
 
 // ENV Variables
 var envVariables =  require('./config/environment');
@@ -16,8 +16,8 @@ const USER_TOKEN = envVariables.USER_API_TOKEN;
 var app = express();
 app.set('port', 3000);
 app.use(express.json())
-app.get("/latex/convert", latexService.convert)
-app.post("/latex/convert", bodyParser.json({ limit: '1mb' }), latexService.convert);
+// app.get("/latex/convert", latexService.convert)
+// app.post("/latex/convert", bodyParser.json({ limit: '1mb' }), latexService.convert);
 app.all(['/api/framework/v1/read/*',
      '/learner/framework/v1/read/*',
      '/learner/questionset/v1/hierarchy/*',
