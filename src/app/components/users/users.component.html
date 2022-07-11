@@ -1,0 +1,17 @@
+<h2 mat-dialog-title color="primary">Select {{ selectedRoleType }} </h2>
+<div class="masonry-grid" *ngFor="let user of users">
+  <div class="sb-card" (click)="selectUser(user)">
+    <div class="sb-card-body">
+      <div class="sb-card-metas">
+          <div class="sb-card-image mr-16">
+              {{ user.firstName.charAt(0) }}
+          </div>
+          <div class="sb-card-meta course">
+            <div class="sb-card-meta-item mb-16 font-weight-bold">
+                {{user?.firstName}}
+            </div>
+          </div>
+      </div>
+    </div> 
+  </div>
+</div>
