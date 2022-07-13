@@ -16,6 +16,7 @@ const USER_TOKEN = envVariables.USER_API_TOKEN;
 var app = express();
 app.set('port', 3000);
 app.use(express.json())
+app.use(express.static(process.cwd()+"/dist/"));
 // app.get("/latex/convert", latexService.convert)
 // app.post("/latex/convert", bodyParser.json({ limit: '1mb' }), latexService.convert);
 app.all(['/api/framework/v1/read/*',
@@ -136,4 +137,9 @@ app.use(['/content/preview/*', '/content-plugins/*', '/assets/public/*'], proxy(
         return proxyReqOpts;
     }
 }));
+
+app.get('/*', (req,res) => {
+    res.sendFile(process.cwd()+"/dist/index.html")
+});
+  
 http.createServer(app).listen(app.get('port'), 3000);
