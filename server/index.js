@@ -22,7 +22,10 @@ app.use(express.static(process.cwd()+"/dist/"));
 app.all(['/api/framework/v1/read/*',
      '/learner/framework/v1/read/*',
      '/learner/questionset/v1/hierarchy/*',
-     '/api/channel/v1/read/*'], proxy(BASE_URL, {
+     '/api/channel/v1/read/*',
+     '/action/composite/v3/search',
+     '/api/questionset/v1/read/*',
+     '/api/question/v1*'], proxy(BASE_URL, {
     https: true,
     proxyReqPathResolver: function(req) {
         console.log('proxyReqPathResolver ',  urlHelper.parse(req.url).path);
