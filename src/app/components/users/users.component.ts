@@ -17,8 +17,12 @@ export class UsersComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.users = _.get(this.data, 'usersData');
-    this.selectedRoleType = _.get(this.data, 'selectedRoleType');
+    if (this.data) {
+      if (_.get(this.data, 'usersData')) {
+        this.users = _.get(this.data, 'usersData');
+      }
+      this.selectedRoleType = _.get(this.data, 'selectedRoleType');
+    }
   }
   selectUser(user) {
     user.role = _.get(this.data, 'selectedRoleType');

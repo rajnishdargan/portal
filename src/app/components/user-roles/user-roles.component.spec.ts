@@ -1,17 +1,22 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { UserRolesComponent } from './user-roles.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MatDialogRef } from '@angular/material/dialog';
-xdescribe('UserRolesComponent', () => {
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { UserService } from 'src/app/services/user/user.service';
+import { HttpClientModule } from '@angular/common/http';
+import { MatDialogModule } from '@angular/material/dialog';
+describe('UserRolesComponent', () => {
   let component: UserRolesComponent;
   let fixture: ComponentFixture<UserRolesComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
+      imports: [RouterTestingModule, HttpClientModule, MatDialogModule],
       declarations: [ UserRolesComponent ],
-      providers: [{provide: MatDialogRef , useValue: {} }]
+      providers: [
+        {provide: MatDialogRef , useValue: {} },
+        UserService
+      ]
     })
     .compileComponents();
   });

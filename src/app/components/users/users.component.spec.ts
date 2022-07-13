@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { UsersComponent } from './users.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 describe('UsersComponent', () => {
   let component: UsersComponent;
@@ -8,7 +9,12 @@ describe('UsersComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UsersComponent ]
+      imports: [ RouterTestingModule ],
+      declarations: [ UsersComponent ],
+      providers: [
+        {provide: MatDialogRef , useValue: {} },
+        {provide: MAT_DIALOG_DATA, useValue: {usersData: {}, selectedRoleType: 'creator'}}
+      ]
     })
     .compileComponents();
   });
