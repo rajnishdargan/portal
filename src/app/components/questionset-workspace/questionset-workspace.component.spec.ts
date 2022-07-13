@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { QuestionsetWorkspaceComponent } from './questionset-workspace.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user/user.service';
+import { HttpClientModule } from '@angular/common/http';
 describe('QuestionsetWorkspaceComponent', () => {
   class RouterStub {
     public navigate = jasmine.createSpy('navigate');
@@ -12,9 +14,9 @@ describe('QuestionsetWorkspaceComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
+      imports: [RouterTestingModule, HttpClientModule],
       declarations: [ QuestionsetWorkspaceComponent ],
-      providers: [{ provide: Router, useClass: RouterStub }]
+      providers: [{ provide: Router, useClass: RouterStub }, UserService]
     })
     .compileComponents();
   });

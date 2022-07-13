@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { QuestionsetListComponent } from './questionset-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HelperService } from '../../services/helper/helper.service';
+import { UserService } from 'src/app/services/user/user.service';
+import { ActionService } from '../../services/action/action.service';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
 describe('QuestionsetListComponent', () => {
@@ -9,6 +11,15 @@ describe('QuestionsetListComponent', () => {
     navigate = jasmine.createSpy('navigate');
     url = ['/questionset'];
   }
+  const mockUserData = {
+    id: '5a587cc1',
+    fullName: 'N11',
+    firstName: 'N11',
+    lastName: '',
+    channelId: '12345',
+    frameworkId: 'k-12',
+    orgIds: ['12345']
+  };
   let component: QuestionsetListComponent;
   let fixture: ComponentFixture<QuestionsetListComponent>;
 
@@ -16,8 +27,12 @@ describe('QuestionsetListComponent', () => {
     await TestBed.configureTestingModule({
       imports: [HttpClientModule],
       declarations: [ QuestionsetListComponent ],
-      providers: [ HelperService,
-        { provide: Router, useClass: RouterStub } ]
+      providers: [
+        HelperService,
+        UserService,
+        ActionService,
+        { provide: Router, useClass: RouterStub }
+      ]
     })
     .compileComponents();
   });
@@ -48,6 +63,8 @@ describe('QuestionsetListComponent', () => {
 
   it('#getAllQuestionsetList() should call helperService.getQuestionsetList', () => {
     component.questionsetList = [];
+    const userService = TestBed.get(UserService);
+    spyOnProperty(userService, 'userProfile').and.returnValue(mockUserData);
     const helperService = TestBed.get(HelperService);
     spyOn(helperService, 'getQuestionsetList').and.returnValue(of({result: {QuestionSet:
       [{name: 'Test Questionset', status: 'Draft'}]}}));

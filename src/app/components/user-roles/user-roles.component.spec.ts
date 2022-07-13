@@ -3,6 +3,7 @@ import { UserRolesComponent } from './user-roles.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { UserService } from 'src/app/services/user/user.service';
+import { ActionService } from '../../services/action/action.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 describe('UserRolesComponent', () => {
@@ -15,7 +16,8 @@ describe('UserRolesComponent', () => {
       declarations: [ UserRolesComponent ],
       providers: [
         {provide: MatDialogRef , useValue: {} },
-        UserService
+        UserService,
+        ActionService
       ]
     })
     .compileComponents();

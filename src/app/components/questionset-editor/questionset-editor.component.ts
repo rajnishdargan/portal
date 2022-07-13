@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { questionSetEditorConfig } from './data';
 import { Router, ActivatedRoute } from '@angular/router';
+import { UserService } from 'src/app/services/user/user.service';
 import * as _ from 'lodash-es';
 @Component({
   selector: 'app-questionset-editor',
@@ -11,7 +12,8 @@ export class QuestionsetEditorComponent implements OnInit {
 
   public editorConfig: any = questionSetEditorConfig;
   constructor(
-    public router: Router, private activatedRoute: ActivatedRoute) { }
+    public router: Router, private activatedRoute: ActivatedRoute,
+    public userService: UserService) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: any) => {
@@ -28,7 +30,7 @@ export class QuestionsetEditorComponent implements OnInit {
   }
 
   getEditorMode(status): string {
-    const userRole = JSON.parse(localStorage.getItem('userRole'));
+    const userRole = this.userService.userProfile.role;
     const contentStatus = status.toLowerCase();
     if (contentStatus === 'draft' || contentStatus === 'live' || contentStatus === 'flagdraft'
       || contentStatus === 'unlisted') {

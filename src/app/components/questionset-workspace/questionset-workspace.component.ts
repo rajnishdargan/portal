@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user/user.service';
 @Component({
   selector: 'app-questionset-workspace',
   templateUrl: './questionset-workspace.component.html',
@@ -7,12 +8,12 @@ import { Router } from '@angular/router';
 })
 export class QuestionsetWorkspaceComponent implements OnInit {
 
-  constructor(public router: Router) { }
+  constructor(public router: Router, public userService: UserService) { }
   page: string;
   public userRole: string;
   ngOnInit(): void {
-    if (localStorage.getItem('userRole')) {
-      this.userRole = JSON.parse(localStorage.getItem('userRole'));
+    if (this.userService.userProfile) {
+      this.userRole = this.userService.userProfile.role;
     }
     if (this.router.url === '/questionset/create') {
       if (this.userRole === 'creator') {

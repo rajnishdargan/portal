@@ -26,7 +26,7 @@ export class UserRolesComponent implements OnInit {
   getAllUsersByRoleType(role): void {
     if (role) {
       this.selectedRoleType = role;
-      localStorage.setItem('userRole', JSON.stringify(role));
+      // localStorage.setItem('userRole', JSON.stringify(role));
       this.userService.getAllUsersByRoleType(role).subscribe((response) => {
         console.log('response', response);
         this.dialogRef.close();
@@ -35,7 +35,7 @@ export class UserRolesComponent implements OnInit {
       }, (error) => {
         console.log(error);
         this.dialogRef.close();
-        this.router.navigate(['/questionset']);
+        this.router.navigate(['/']);
       });
     }
   }

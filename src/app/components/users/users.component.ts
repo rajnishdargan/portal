@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user/user.service';
 import * as _ from 'lodash-es';
 @Component({
   selector: 'app-users',
@@ -14,7 +15,8 @@ export class UsersComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<UsersComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private router: Router) { }
+    private router: Router,
+    private userService:UserService) { }
 
   ngOnInit(): void {
     if (this.data) {
@@ -25,7 +27,8 @@ export class UsersComponent implements OnInit {
     }
   }
   selectUser(user) {
-    user.role = _.get(this.data, 'selectedRoleType');
+    user.role = this.selectedRoleType;
+    this.userService.setUserProfile(user)
     this.dialogRef.close();
     this.router.navigate(['/questionset']);
   }
