@@ -8,15 +8,14 @@ import * as _ from 'lodash-es';
 })
 export class UserService {
 
-  public _userProfile: any;
   constructor(private actionService: ActionService) { }
 
   setUserProfile(profileData) {
-    this._userProfile = profileData;
+    localStorage.setItem('userProfile', JSON.stringify(profileData));
   }
 
   public get userProfile() {
-    return _.cloneDeep(this._userProfile);
+    return JSON.parse(localStorage.getItem('userProfile'));
   }
 
   getAllUsersByRoleType(role): Observable<any> {

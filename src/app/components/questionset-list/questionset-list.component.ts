@@ -42,7 +42,7 @@ export class QuestionsetListComponent implements OnInit {
     if (this.userRole === 'creator') {
       QuestionSetStatus = creatorStatus;
     }
-    if (this.userRole === 'reviewer'){
+    if (this.userRole === 'reviewer') {
       QuestionSetStatus = reviewerStatus;
     }
     const req = {
@@ -50,8 +50,7 @@ export class QuestionsetListComponent implements OnInit {
         filters: {
           status: QuestionSetStatus,
           objectType: 'Questionset',
-          channel: this.userService.userProfile.channelId,
-          createdBy: this.userService.userProfile.id
+          channel: this.userService.userProfile.channelId
         },
         offset: 0,
         limit: 200,
@@ -61,6 +60,11 @@ export class QuestionsetListComponent implements OnInit {
         }
       }
     };
+    if (_.get(this.userService.userProfile, 'role') === 'creator') {
+      req.request.filters = { ...req.request.filters, ...{ createdBy: this.userService.userProfile.id } };
+    } else if (_.get(this.userService.userProfile, 'role') === 'reviewer') {
+      req.request.filters = { ...req.request.filters, ...{ createdBy: { '!=': this.userService.userProfile.id } } };
+    }
     this.helperService.getQuestionsetList(req)
       .subscribe((response) => {
         this.questionsetList = _.get(response, 'result.QuestionSet');

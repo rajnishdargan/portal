@@ -1,6 +1,6 @@
 module.exports = {
     "API": {
-        "CHANNEL": "/action/channel/v3/*",
+        "CHANNEL": "/action/channel/v1/*",
         "FRAMEWORK": "/action/framework/v3/*",
         "COMPOSITE": "/action/composite/v3/*",
         "QUESTIONSET_READ": "/api/questionset/v1/read/*",
