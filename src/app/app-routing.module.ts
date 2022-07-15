@@ -7,10 +7,8 @@ import { QuestionsetCreateComponent } from './components/questionset-create/ques
 import { QuestionsetEditorComponent } from './components/questionset-editor/questionset-editor.component';
 import { QuestionsetListComponent } from './components/questionset-list/questionset-list.component';
 import { QuestionsetWorkspaceComponent } from './components/questionset-workspace/questionset-workspace.component';
+
 const routes: Routes = [
-  {
-    path: '', component: HomeComponent
-  },
   {
     path: 'content-list', component: PlayerContentListComponent
   },
@@ -30,6 +28,9 @@ const routes: Routes = [
   },
   {
     path: 'edit/questionset/:id/:status', component: QuestionsetEditorComponent
+  },
+  {
+    path: '', component: HomeComponent
   },
   {
     path: '**', redirectTo: ''

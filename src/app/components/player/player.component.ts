@@ -38,8 +38,10 @@ export class PlayerComponent implements OnInit, OnDestroy {
     this.activatedRoute.params.pipe(takeUntil(this.$unsubscribe)).subscribe((params: any) => {
       this.getContent(params.id);
 
+      /* istanbul ignore else */
       if (this.navigationService.nextContents.length > 1) {
         const currentContentIndex = this.navigationService.nextContents.findIndex(content => content.id === params.id);
+        /* istanbul ignore else */
         if (currentContentIndex > -1) {
           this.nextContents = [...this.navigationService.nextContents.slice(currentContentIndex + 1)];
         }
@@ -67,7 +69,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
   }
 
   setConfig(): void {
-    this.editConfig.showFeedback = this.playerConfig.metadata.children.every(child => child.showFeedback === 'Yes') ? 'Yes' : 'No';
+    this.editConfig.showFeedback = this.playerConfig.metadata?.children?.every(child => child.showFeedback === 'Yes') ? 'Yes' : 'No';
     this.editConfig.showSubmitConfirmation = this.playerConfig.metadata.requiresSubmit ? this.playerConfig.metadata.requiresSubmit : '';
     this.editConfig.summaryType = this.playerConfig.metadata.summaryType ? this.playerConfig.metadata.summaryType : '';
     this.editConfig.showTimer = this.playerConfig.metadata.showTimer ? this.playerConfig.metadata.showTimer : '';
@@ -89,6 +91,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().pipe(takeUntil(this.$unsubscribe)).subscribe(result => {
+      /* istanbul ignore else */
       if (result) {
         this.updateConfig(result);
       }
@@ -96,6 +99,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
   }
 
   updateConfig(result): void {
+    /* istanbul ignore else */
     if (result.showFeedback) {
       if (result.showFeedback === 'Yes') {
         this.playerConfig.metadata.children.forEach(child => {
@@ -108,17 +112,21 @@ export class PlayerComponent implements OnInit, OnDestroy {
       }
     }
 
+    /* istanbul ignore else */
     if (result.showSubmitConfirmation) {
       this.playerConfig.metadata.requiresSubmit = result.showSubmitConfirmation;
     }
 
+    /* istanbul ignore else */
     if (result.summaryType) {
       this.playerConfig.metadata.summaryType = result.summaryType;
     }
 
+    /* istanbul ignore else */
     if (result.showTimer) {
       this.playerConfig.metadata.showTimer = result.showTimer;
 
+      /* istanbul ignore else */
       if (result.showTimer === 'Yes' && !this.playerConfig.metadata.timeLimits) {
         this.playerConfig.metadata.timeLimits = {
           maxTime: '120',
@@ -139,6 +147,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
   }
 
   onPlayerEvent(event) {
+    /* istanbul ignore else */
     if (event?.edata?.type === 'NEXT_CONTENT_PLAY') {
       this.router.navigate(['/player', this.nextContents[0].id]);
     }
