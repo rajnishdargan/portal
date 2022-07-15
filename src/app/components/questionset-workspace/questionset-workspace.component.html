@@ -2,9 +2,6 @@
     <button mat-button color="primary" (click)="navigatetoHome()">
         <mat-icon>arrow_back</mat-icon>&nbsp;Back
     </button>
-    <!-- <span>
-        User Role: {{userRole| uppercase}}
-    </span> -->
 </mat-toolbar>
 
 <div class="d-flex">
@@ -17,7 +14,7 @@
             </ul>
             <ul>
                 <li class="active mb-0" [class.active]="this.router.isActive('/questionset/questionset-list')"
-                    (click)="nagivateToPage('questionset-list')">questionset-list</li>
+                    (click)="nagivateToPage('questionset-list')">Questionset List</li>
             </ul>
         </div>
     </div>

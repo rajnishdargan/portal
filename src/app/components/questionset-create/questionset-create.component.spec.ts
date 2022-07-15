@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { QuestionsetCreateComponent } from './questionset-create.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HelperService } from '../../services/helper/helper.service';
+import { UserService } from 'src/app/services/user/user.service';
+import { ActionService } from '../../services/action/action.service';
 import { HttpClientModule } from '@angular/common/http';
 import { of, throwError } from 'rxjs';
 import { Router } from '@angular/router';
@@ -10,6 +12,15 @@ describe('QuestionsetCreateComponent', () => {
     navigate = jasmine.createSpy('navigate');
     url = ['/questionset', '/edit/questionset/'];
   }
+  const mockUserData = {
+    id: '5a587cc1',
+    fullName: 'N11',
+    firstName: 'N11',
+    lastName: '',
+    channelId: '12345',
+    frameworkId: 'k-12',
+    orgIds: ['12345']
+  };
   let component: QuestionsetCreateComponent;
   let fixture: ComponentFixture<QuestionsetCreateComponent>;
 
@@ -17,7 +28,7 @@ describe('QuestionsetCreateComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ RouterTestingModule, HttpClientModule],
       declarations: [ QuestionsetCreateComponent ],
-      providers: [ HelperService,
+      providers: [ HelperService, UserService, ActionService,
         { provide: Router, useClass: RouterStub } ]
     })
     .compileComponents();
@@ -34,6 +45,8 @@ describe('QuestionsetCreateComponent', () => {
   });
 
   it ('#createContent() should call #navigateToQuestionset()', () => {
+    const userService = TestBed.get(UserService);
+    spyOnProperty(userService, 'userProfile').and.returnValue(mockUserData);
     const helperService = TestBed.get(HelperService);
     spyOn(helperService, 'createContent').and.returnValue(of({result: {identifier: 'do_12345'}}));
     spyOn(component, 'navigateToQuestionset').and.callFake(() => {});
@@ -45,6 +58,8 @@ describe('QuestionsetCreateComponent', () => {
   });
 
   it ('#createContent() should not call #navigateToQuestionset()', () => {
+    const userService = TestBed.get(UserService);
+    spyOnProperty(userService, 'userProfile').and.returnValue(mockUserData);
     const helperService = TestBed.get(HelperService);
     spyOn(helperService, 'createContent').and.returnValue(throwError({}));
     spyOn(component, 'navigateToQuestionset').and.callFake(() => {});

@@ -1,14 +1,16 @@
 import { TestBed } from '@angular/core/testing';
-import { ActionService } from './action.service';
+import { UserService } from './user.service';
+import { ActionService } from '../action/action.service';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-xdescribe('ActionService', () => {
-  let service: ActionService;
+xdescribe('UserService', () => {
+  let service: UserService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ HttpClientModule ]
     });
-    service = TestBed.inject(ActionService);
+    service = TestBed.inject(UserService);
   });
 
   it('should be created', () => {

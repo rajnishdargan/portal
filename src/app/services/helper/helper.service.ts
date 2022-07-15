@@ -20,12 +20,38 @@ export class HelperService {
       })
     );
   }
+
+  getQuestionsetDetails(questionsetId: string, option: any = { params: {} }): Observable<any> {
+    // const param = { fields: this.configService.editorConfig.DEFAULT_PARAMS_FIELDS };
+    const param = {};
+    const req = {
+      url: 'questionset/v1/read' + questionsetId,
+      param: { ...param, ...option.params },
+    };
+    return this.actionService.get(req).pipe(
+      map((response: any) => {
+        return response;
+      })
+    );
+  }
+
+  getChannel(channelId: string): Observable<any> {
+    const req = {
+      url: 'channel/v1/read/' + channelId,
+    };
+    return this.actionService.get(req).pipe(
+      map((response: any) => {
+        return response;
+      })
+    );
+  }
+
   createContent(reqBody): Observable<any> {
     const req = {
       url: 'questionset/v1/create',
       data: {
         request: reqBody
-    }
+      }
     };
     return this.actionService.post(req);
   }

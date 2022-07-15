@@ -1,32 +1,32 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { UserRolesComponent } from './user-roles.component';
+import { UsersComponent } from './users.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UserService } from 'src/app/services/user/user.service';
 import { ActionService } from '../../services/action/action.service';
 import { HttpClientModule } from '@angular/common/http';
-import { MatDialogModule } from '@angular/material/dialog';
-describe('UserRolesComponent', () => {
-  let component: UserRolesComponent;
-  let fixture: ComponentFixture<UserRolesComponent>;
+describe('UsersComponent', () => {
+  let component: UsersComponent;
+  let fixture: ComponentFixture<UsersComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule, HttpClientModule, MatDialogModule],
-      declarations: [ UserRolesComponent ],
+      imports: [ RouterTestingModule, HttpClientModule ],
+      declarations: [ UsersComponent ],
       providers: [
-        {provide: MatDialogRef , useValue: {} },
         UserService,
-        ActionService
+        ActionService,
+        {provide: MatDialogRef , useValue: {} },
+        {provide: MAT_DIALOG_DATA, useValue: {usersData: {}, selectedRoleType: 'creator'}}
       ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UserRolesComponent);
+    fixture = TestBed.createComponent(UsersComponent);
     component = fixture.componentInstance;
-    // fixture.detectChanges();
+    fixture.detectChanges();
   });
 
   it('should create', () => {

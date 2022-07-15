@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HelperService } from '../../services/helper/helper.service';
+import { UserService } from 'src/app/services/user/user.service'; 
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 @Component({
@@ -11,10 +12,11 @@ export class QuestionsetCreateComponent implements OnInit {
 
   constructor(
   private router: Router,
-  public helperService: HelperService) { }
+  public helperService: HelperService,
+  public userService: UserService) { }
 
   ngOnInit(): void {
-    const userRole = JSON.parse(localStorage.getItem('userRole'));
+    const userRole = this.userService.userProfile.role;
     if (userRole !== 'creator') {
       this.router.navigate(['/questionset']);
     }
@@ -26,9 +28,9 @@ export class QuestionsetCreateComponent implements OnInit {
           name: 'Untitled QuestionSet',
           mimeType: 'application/vnd.sunbird.questionset',
           primaryCategory: 'Practice Question Set',
-          createdBy: environment.userDetails.id,
-          createdFor: [environment.channel],
-          framework: environment.framework,
+          createdBy: this.userService.userProfile.id,
+          createdFor: [this.userService.userProfile.channelId],
+          framework: this.userService.userProfile.frameworkId,
           code: '7d5aaa70-ffb8-d062-ba10-1db445a11dbc'
         }
     };

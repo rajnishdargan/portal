@@ -1,139 +1,98 @@
-var express = require('express'),
-    http = require('http');
-    bodyParser = require('body-parser'),
-    proxy = require('express-http-proxy'),
-    urlHelper = require('url');
-const latexService = require('./latexService.js')
+const express = require('express');
+const http = require('http');
+const bodyParser = require('body-parser');
+const proxy = require('express-http-proxy');
+const urlHelper = require('url');
+const proxyUtils = require('./proxyUtils.js');
+const responseUtils = require("./responseUtil.js");
+const uuid = require('uuid/v1');
+const routes = require('./config/constants');
+const latexService = require('./latexService.js');
 
-// ENV Variables
-var envVariables =  require('./config/environment');
-
+const envVariables = require('./config/environment');
 const BASE_URL = envVariables.BASE_URL;
-const API_AUTH_TOKEN = envVariables.API_AUTH_TOKEN;
-const PORTAL_COOKIES = envVariables.PORTAL_COOKIES;
-const USER_TOKEN = envVariables.USER_API_TOKEN;
 
 var app = express();
 app.set('port', 3000);
 app.use(express.json())
-app.get("/latex/convert", latexService.convert)
-app.post("/latex/convert", bodyParser.json({ limit: '1mb' }), latexService.convert);
-app.all(['/api/framework/v1/read/*',
-     '/learner/framework/v1/read/*',
-     '/learner/questionset/v1/hierarchy/*',
-     '/api/channel/v1/read/*'], proxy(BASE_URL, {
-    https: true,
-    proxyReqPathResolver: function(req) {
-        console.log('proxyReqPathResolver ',  urlHelper.parse(req.url).path);
-        return urlHelper.parse(req.url).path;
-    },
-    proxyReqOptDecorator: function(proxyReqOpts, srcReq) {
-        console.log('proxyReqOptDecorator 2')
-        // you can update headers
-        proxyReqOpts.headers['Content-Type'] = 'application/json';
-        proxyReqOpts.headers['user-id'] = 'content-editor';
-        // proxyReqOpts.headers['Cookie'] = PORTAL_COOKIES;
-        proxyReqOpts.headers['authorization'] = `Bearer ${API_AUTH_TOKEN}`;
-        proxyReqOpts.headers['x-authenticated-user-token']= USER_TOKEN
-        return proxyReqOpts;
+
+app.get(routes.API.LATEX.CONVERT, latexService.convert);
+app.post(routes.API.LATEX.CONVERT, bodyParser.json({ limit: '1mb' }), latexService.convert);
+
+app.post(routes.API.USERS, function (req, res) {
+  let response = {
+    apiId: "api.v1.users",
+    apiVersion: "1.0",
+    msgid: uuid(),
+    result: {
+      users: []
     }
-}));
-app.use(['/action/questionset/v1/*',
-    '/action/question/v1/*',
-    '/action/collection/v1/*',
-    '/action/object/category/definition/v1/*',
-    '/action/collection/v1/*'
-    ], proxy(BASE_URL, {
-    https: true,
-    limit: '30mb',
-    proxyReqPathResolver: function (req) {
-        let originalUrl = req.originalUrl.replace('/action/', '/api/')
-        console.log('proxyReqPathResolver questionset', originalUrl, require('url').parse(originalUrl).path);
-        return require('url').parse(originalUrl).path;
-    },
-    proxyReqOptDecorator: function (proxyReqOpts, srcReq) {
-        console.log('proxyReqOptDecorator 3')
-        // you can update headers
-        proxyReqOpts.headers['Content-Type'] = 'application/json';
-        proxyReqOpts.headers['user-id'] = 'content-editor';
-        // proxyReqOpts.headers['Cookie'] = PORTAL_COOKIES;
-        proxyReqOpts.headers['authorization'] = `Bearer ${API_AUTH_TOKEN}`;
-        proxyReqOpts.headers['x-authenticated-user-token'] = USER_TOKEN;
-         return proxyReqOpts;
-    }
+  };
+  var roleType = req.body.roleType && req.body.roleType.toLowerCase();
+  if (roleType == 'creator') {
+    response.result.users = envVariables.CREATORS.filter(function (user) {
+      return user;
+    });
+    let creatorResonse = responseUtils.successResponse(response)
+    res.send(creatorResonse);
+  } else if (roleType == 'reviewer') {
+    response.result.users = envVariables.REVIEWERS.filter(function (user) {
+      return user;
+    });
+    let reviewerResonse = responseUtils.successResponse(response)
+    res.send(reviewerResonse);
+  } else {
+    response.errCode = 400;
+    response.errmsg = "Request should have the roleType";
+    let errorResponse = responseUtils.errorResponse(response)
+    res.status(400).send(response);
+  }
+});
+
+app.use([
+  routes.API.COMPOSITE,
+  routes.API.CHANNEL,
+  routes.API.FRAMEWORK,
+  routes.API.QUESTIONSET_READ,
+  routes.API.QUESTION_LIST
+], proxy(BASE_URL, {
+  https: true,
+  proxyReqPathResolver: function (req) {
+    let originalUrl = req.originalUrl.replace("/action/", "/api/");
+    originalUrl = originalUrl.replace("/v3/", "/v1/");
+    return urlHelper.parse(originalUrl).path;
+  },
+  proxyReqOptDecorator: proxyUtils.decoratePublicRequestHeaders()
 }));
 
-app.use(['/action/program/v1/*',
-    '/action/question/v1/bulkUpload',
-    '/action/question/v1/bulkUploadStatus'
-    ], proxy(BASE_URL, {
-    https: true,
-    limit: '30mb',
-    proxyReqPathResolver: function (req) {
-        let originalUrl = req.originalUrl.replace('/action/', '/api/')
-        console.log('proxyReqPathResolver questionset', originalUrl, require('url').parse(originalUrl).path);
-        return require('url').parse(originalUrl).path;
-    },
-    proxyReqOptDecorator: function (proxyReqOpts, srcReq) {
-        console.log('proxyReqOptDecorator 3')
-        // you can update headers
-        proxyReqOpts.headers['Content-Type'] = 'application/json';
-        proxyReqOpts.headers['user-id'] = 'content-editor';
-        // proxyReqOpts.headers['Cookie'] = PORTAL_COOKIES;
-        proxyReqOpts.headers['authorization'] = `Bearer ${API_AUTH_TOKEN}`;
-        proxyReqOpts.headers['x-authenticated-user-token'] = USER_TOKEN;
-         return proxyReqOpts;
-    }
+app.all([
+  routes.API.LEARNER.FRAMEWORK,
+  routes.API.LEARNER.QUESTIONSET_HIERARCHY,
+], proxy(BASE_URL, {
+  https: true,
+  proxyReqPathResolver: function (req) {
+    console.log('proxyReqPathResolver ', urlHelper.parse(req.url).path);
+    return urlHelper.parse(req.url).path;
+  },
+  proxyReqOptDecorator: proxyUtils.decoratePublicRequestHeaders()
 }));
 
-app.use(['/api','/assets','/action'], proxy(BASE_URL, {
-    https: true,
-    limit: '30mb',
-    proxyReqPathResolver: function(req) {
-        console.log('proxyReqPathResolver ',  urlHelper.parse(req.url).path);
-        return urlHelper.parse(req.url).path;
-    },
-    proxyReqOptDecorator: function(proxyReqOpts, srcReq) {
-        console.log('proxyReqOptDecorator 4')
-        // you can update headers
-        proxyReqOpts.headers['Content-Type'] = 'application/json';
-        proxyReqOpts.headers['user-id'] = 'content-editor';
-        // proxyReqOpts.headers['Cookie'] = PORTAL_COOKIES;
-        proxyReqOpts.headers['authorization'] = `Bearer ${API_AUTH_TOKEN}`;
-        proxyReqOpts.headers['x-authenticated-user-token'] = USER_TOKEN;
-        return proxyReqOpts;
-    }
+app.use([routes.API.PREFIX.ACTION], proxy(BASE_URL, {
+  https: true,
+  proxyReqPathResolver: function (req) {
+    let originalUrl = req.originalUrl.replace("/action/", "/api/");
+    return urlHelper.parse(originalUrl).path;
+  },
+  proxyReqOptDecorator: proxyUtils.decoratePublicRequestHeaders()
 }));
 
-app.use(['/action/content/*'], proxy(BASE_URL, {
-    https: true,
-    proxyReqPathResolver: function (req) {
-        let originalUrl = req.originalUrl.replace('/api/', '/api/')
-        console.log('proxyReqPathResolver questionset', originalUrl, require('url').parse(originalUrl).path);
-        return require('url').parse(originalUrl).path;
-    },
-    proxyReqOptDecorator: function (proxyReqOpts, srcReq) {
-        console.log('proxyReqOptDecorator 1')
-        // you can update headers
-        proxyReqOpts.headers['Content-Type'] = 'application/json';
-        proxyReqOpts.headers['user-id'] = 'content-editor';
-        // proxyReqOpts.headers['Cookie'] = PORTAL_COOKIES;
-        return proxyReqOpts;
-    }
+app.use([routes.API.PREFIX.API], proxy(BASE_URL, {
+  https: true,
+  proxyReqPathResolver: function (req) {
+    console.log('originalUrl', req.originalUrl)
+    return urlHelper.parse(req.originalUrl).path;
+  },
+  proxyReqOptDecorator: proxyUtils.decoratePublicRequestHeaders()
 }));
-app.use(['/content/preview/*', '/content-plugins/*', '/assets/public/*'], proxy(BASE_URL, {
-    https: true,
-    proxyReqPathResolver: function(req) {
-        return require('url').parse(`https://${BASE_URL}` + req.originalUrl).path
-    },
-    proxyReqOptDecorator: function(proxyReqOpts, srcReq) {
-        console.log('proxyReqOptDecorator 5')
-        // you can update headers 
-        proxyReqOpts.headers['Content-Type'] = 'application/json';
-        proxyReqOpts.headers['user-id'] = 'content-editor';
-        // proxyReqOpts.headers['Cookie'] = PORTAL_COOKIES;
-        proxyReqOpts.headers['authorization'] = `Bearer ${API_AUTH_TOKEN}`;
-        return proxyReqOpts;
-    }
-}));
+
 http.createServer(app).listen(app.get('port'), 3000);
