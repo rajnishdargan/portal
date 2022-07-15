@@ -6,6 +6,9 @@ let envVariables = {
   USER_API_TOKEN: env.inquiry_portal_user_api_token || "",
   PORTAL_COOKIES: "",
   CHANNEL_ID: env.inquiry_portal_channel_id || "",
-  USER_ID: env.inquiry_portal_user_id || ""
+  USER_ID: env.inquiry_portal_user_id || "",
+  CREATORS: env.inquiry_portal_creators || [],
+  REVIEWERS: env.inquiry_portal_reviewers || []
+
 }
 module.exports = envVariables;
