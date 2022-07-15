@@ -1,0 +1,23 @@
+<h2 mat-dialog-title color="primary" *ngIf="users.length > 0">Select {{ selectedRoleType }} </h2>
+<div class="masonry-grid" *ngIf="users.length > 0">
+  <div class="sb-card" *ngFor="let user of users">
+    <div class="sb-card-body" (click)="selectUser(user)">
+      <div class="sb-card-metas">
+          <div class="sb-card-image mr-16">
+              {{ user.firstName.charAt(0) }}
+          </div>
+          <div class="sb-card-meta course">
+            <div class="sb-card-meta-item mb-16 font-weight-bold">
+                {{user?.firstName}}
+            </div>
+          </div>
+      </div>
+    </div> 
+  </div>
+</div>
+<div class="masonry-grid" *ngIf="users.length == 0">
+  <div>
+    {{selectedRoleType | titlecase}} list is empty,
+    Please set the {{selectedRoleType}} list in environment.
+  </div>
+</div>

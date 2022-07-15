@@ -9,7 +9,7 @@ export class HelperService {
 
   constructor(private actionService: ActionService) { }
 
-  getAllQuestionsetList(requestData: object): Observable<any> {
+  getQuestionsetList(requestData: object): Observable<any> {
     const req = {
       url: 'composite/v3/search',
       data: requestData
@@ -19,5 +19,40 @@ export class HelperService {
         return response;
       })
     );
+  }
+
+  getQuestionsetDetails(questionsetId: string, option: any = { params: {} }): Observable<any> {
+    // const param = { fields: this.configService.editorConfig.DEFAULT_PARAMS_FIELDS };
+    const param = {};
+    const req = {
+      url: 'questionset/v1/read' + questionsetId,
+      param: { ...param, ...option.params },
+    };
+    return this.actionService.get(req).pipe(
+      map((response: any) => {
+        return response;
+      })
+    );
+  }
+
+  getChannel(channelId: string): Observable<any> {
+    const req = {
+      url: 'channel/v1/read/' + channelId,
+    };
+    return this.actionService.get(req).pipe(
+      map((response: any) => {
+        return response;
+      })
+    );
+  }
+
+  createContent(reqBody): Observable<any> {
+    const req = {
+      url: 'questionset/v1/create',
+      data: {
+        request: reqBody
+      }
+    };
+    return this.actionService.post(req);
   }
 }

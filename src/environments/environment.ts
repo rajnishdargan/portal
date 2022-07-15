@@ -5,6 +5,15 @@
 export const environment = {
   production: false,
   baseUrl: 'https://dev.sunbirded.org/',
+  userDetails: {
+    id: '5a587cc1-e018-4859-a0a8-e842650b9d64',
+    fullName: 'N11',
+    firstName: 'N11',
+    lastName: '',
+    orgIds: ['01309282781705830427']
+  },
+  channel: '01309282781705830427',
+  framework: 'ekstep_ncert_k-12'
 };
 
 /*
