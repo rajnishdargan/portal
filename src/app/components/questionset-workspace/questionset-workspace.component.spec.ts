@@ -4,6 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user/user.service';
 import { HttpClientModule } from '@angular/common/http';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 describe('QuestionsetWorkspaceComponent', () => {
   class RouterStub {
     public navigate = jasmine.createSpy('navigate');
@@ -16,7 +17,8 @@ describe('QuestionsetWorkspaceComponent', () => {
     await TestBed.configureTestingModule({
       imports: [RouterTestingModule, HttpClientModule],
       declarations: [ QuestionsetWorkspaceComponent ],
-      providers: [{ provide: Router, useClass: RouterStub }, UserService]
+      providers: [{ provide: Router, useClass: RouterStub }, UserService],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   });
