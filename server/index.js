@@ -54,7 +54,8 @@ app.use([
   routes.API.CHANNEL,
   routes.API.FRAMEWORK,
   routes.API.QUESTIONSET_READ,
-  routes.API.QUESTION_LIST
+  routes.API.QUESTION_LIST,
+  routes.API.TELEMMETRY
 ], proxy(BASE_URL, {
   https: true,
   proxyReqPathResolver: function (req) {
