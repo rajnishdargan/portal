@@ -91,7 +91,9 @@ export class PlayerContentListComponent implements OnInit {
   }
 
   updateFilterList(type: string, category: string): void {
-    const categoryContents = SampleContentList[type].filter(content => content.category === category)
+    const categoryContents = SampleContentList[type].filter(content => content.category === category);
+
+    /* istanbul ignore else */
     if (categoryContents.length) {
       this.filteredList[type] = this.filteredList[type].concat(categoryContents);
     }

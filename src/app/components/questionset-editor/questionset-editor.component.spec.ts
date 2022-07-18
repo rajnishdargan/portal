@@ -7,6 +7,7 @@ import { of } from 'rxjs';
 import { UserService } from 'src/app/services/user/user.service';
 import { ActionService } from '../../services/action/action.service';
 import { HttpClientModule } from '@angular/common/http';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 describe('QuestionsetEditorComponent', () => {
   class RouterStub {
     navigate = jasmine.createSpy('navigate');
@@ -37,9 +38,10 @@ describe('QuestionsetEditorComponent', () => {
       declarations: [QuestionsetEditorComponent],
       providers: [
         { provide: Router, useClass: RouterStub },
-        {provide: ActivatedRoute, useValue: mockActivatedRoute},
+        { provide: ActivatedRoute, useValue: mockActivatedRoute },
         UserService, ActionService
-    ]
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
       .compileComponents();
   });
@@ -66,7 +68,7 @@ describe('QuestionsetEditorComponent', () => {
 
   it('#editorEventListener() should route to questionset', () => {
     spyOn(component, 'editorEventListener').and.callThrough();
-    component.editorEventListener({action: 'backContent'});
+    component.editorEventListener({ action: 'backContent' });
     // tslint:disable-next-line:no-string-literal
     expect(component['router'].navigate).toHaveBeenCalledWith(['/questionset/questionset-list']);
   });

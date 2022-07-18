@@ -6,6 +6,7 @@ import { UserService } from 'src/app/services/user/user.service';
 import { ActionService } from '../../services/action/action.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 describe('UserRolesComponent', () => {
   let component: UserRolesComponent;
   let fixture: ComponentFixture<UserRolesComponent>;
@@ -18,7 +19,8 @@ describe('UserRolesComponent', () => {
         {provide: MatDialogRef , useValue: {} },
         UserService,
         ActionService
-      ]
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   });
