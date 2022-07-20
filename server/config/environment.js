@@ -8,8 +8,8 @@ let envVariables = {
   PORTAL_COOKIES: "",
   CHANNEL_ID: env.inquiry_portal_channel_id || "",
   USER_ID: env.inquiry_portal_user_id || "",
-  CREATORS: env.inquiry_portal_creators || users.CREATORS,
-  REVIEWERS: env.inquiry_portal_reviewers || users.REVIEWERS
+  CREATORS: users.CREATORS || env.inquiry_portal_creators,
+  REVIEWERS: users.REVIEWERS || env.inquiry_portal_reviewers
 
 }
 module.exports = envVariables;
