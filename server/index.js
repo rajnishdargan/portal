@@ -51,11 +51,18 @@ app.post(routes.API.USERS, function (req, res) {
 });
 
 app.use([
-  routes.API.COMPOSITE,
   routes.API.CHANNEL,
+  routes.API.COMPOSITE,
   routes.API.FRAMEWORK,
-  routes.API.QUESTIONSET_READ,
   routes.API.QUESTION_LIST,
+  routes.API.QUESTIONSET.CREATE,
+  routes.API.QUESTIONSET.READ,
+  routes.API.QUESTIONSET.REVIEW,
+  routes.API.QUESTIONSET.REJECT,
+  routes.API.QUESTIONSET.PUBLISH,
+  routes.API.ASSET.CREATE,
+  routes.API.ASSET.ASSET_UPLOAD,
+  routes.API.ASSET.CONTENT_UPLOAD,
   routes.API.TELEMMETRY
 ], proxy(BASE_URL, {
   https: true,
@@ -70,6 +77,7 @@ app.use([
 app.all([
   routes.API.LEARNER.FRAMEWORK,
   routes.API.LEARNER.QUESTIONSET_HIERARCHY,
+  routes.API.CHANNEL
 ], proxy(BASE_URL, {
   https: true,
   proxyReqPathResolver: function (req) {
@@ -88,7 +96,7 @@ app.use([routes.API.PREFIX.ACTION], proxy(BASE_URL, {
   proxyReqOptDecorator: proxyUtils.decoratePublicRequestHeaders()
 }));
 
-app.use([routes.API.PREFIX.API], proxy(BASE_URL, {
+app.use([routes.API.PREFIX.API, routes.API.PREFIX.ASSETS], proxy(BASE_URL, {
   https: true,
   proxyReqPathResolver: function (req) {
     console.log('originalUrl', req.originalUrl)

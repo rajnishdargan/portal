@@ -6,7 +6,7 @@ module.exports = {
             firstName: 'N11',
             lastName: '',
             channelId: '01309282781705830427',
-            frameworkId: 'ekstep_ncert_k-12'
+            frameworkId: 'inquiry_k-12'
         },
         {
             id: '0b71985d-fcb0-4018-ab14-83f10c3b0426',
@@ -14,7 +14,7 @@ module.exports = {
             firstName: 'N131',
             lastName: '',
             channelId: '01309282781705830427',
-            frameworkId: 'ekstep_ncert_k-12'
+            frameworkId: 'inquiry_k-12'
         }
     ],
     REVIEWERS: [

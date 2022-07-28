@@ -49,6 +49,7 @@ export class QuestionsetEditorComponent implements OnInit {
   setEditorConfig() {
     this.editorConfig.context.user = this.userService.userProfile;
     this.editorConfig.context.channel = this.userService.userProfile.channelId;
+    this.editorConfig.context.framework = this.userService.userProfile.frameworkId;
     this.editorConfig.context.contextRollup = {
       l1: this.userService.userProfile.channelId,
     };
@@ -58,7 +59,6 @@ export class QuestionsetEditorComponent implements OnInit {
   }
 
   editorEventListener(event): any {
-    console.log('editor event', event);
     if (event.action === 'backContent' || event.action === 'submitContent' || event.action === 'publishContent' || event.action === 'rejectContent') {
       this.router.navigate(['/questionset/questionset-list']);
     }

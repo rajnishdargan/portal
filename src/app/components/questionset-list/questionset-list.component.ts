@@ -68,7 +68,6 @@ export class QuestionsetListComponent implements OnInit {
     this.helperService.getQuestionsetList(req)
       .subscribe((response) => {
         this.questionsetList = _.get(response, 'result.QuestionSet');
-        console.log('questionsetList', this.questionsetList);
       }, (error) => {
         console.log(error);
       });
