@@ -8,7 +8,7 @@ module.exports = {
         "TELEMMETRY": "/action/data/v3/telemetry",
         "OBJECT_CATEGORY_DEFINITION": "/action/object/category/definition/v1/*",
         "PREFIX": {
-            "ACTION": "/action/",
+            "ACTION": "/action",
             "ASSETS": "/assets",
             "API": "/api"
         },
@@ -29,7 +29,7 @@ module.exports = {
         },
         "ASSET": {
             "CREATE": "/action/asset/v1/create",
-            "CONTENT_UPLOAD": "/action/content/v3/upload/url/*",
+            "CONTENT_UPLOAD_URL": "/action/content/v3/upload/url/*",
             "ASSET_UPLOAD": "/action/asset/v1/upload/*"
         }
     }
