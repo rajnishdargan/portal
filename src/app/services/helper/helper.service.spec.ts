@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { HelperService } from './helper.service';
-import { ActionService } from '../action/action.service';
+import { DataService } from '../data/data.service';
 import { HttpClientModule } from '@angular/common/http';
 import { mockData } from './helper.service.spec.data';
 import { of, throwError } from 'rxjs';
@@ -11,7 +11,7 @@ describe('HelperService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ HttpClientModule ],
-      providers: [ActionService]
+      providers: [DataService]
     });
     service = TestBed.get(HelperService);
   });
@@ -20,9 +20,9 @@ describe('HelperService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('#getQuestionsetList should call actionService.post', () => {
-    const actionService = TestBed.get(ActionService);
-    spyOn(actionService, 'post').and.returnValue(of(mockData.questionsetListResponse));
+  it('#getQuestionsetList should call dataService.post', () => {
+    const dataService = TestBed.get(DataService);
+    spyOn(dataService, 'post').and.returnValue(of(mockData.questionsetListResponse));
     spyOn(service, 'getQuestionsetList').and.callThrough();
     const req = {
       request: {
@@ -32,15 +32,15 @@ describe('HelperService', () => {
       }
     };
     service.getQuestionsetList(req);
-    expect(actionService.post).toHaveBeenCalled();
+    expect(dataService.post).toHaveBeenCalled();
   });
 
   it('#createContent() should call actionService.post', () => {
-    const actionService = TestBed.get(ActionService);
-    spyOn(actionService, 'post').and.returnValue(mockData.questionsetCreateResponse);
+    const dataService = TestBed.get(DataService);
+    spyOn(dataService, 'post').and.returnValue(mockData.questionsetCreateResponse);
     spyOn(service, 'createContent').and.callThrough();
     service.createContent(mockData.questionsetCreateRequest);
-    expect(actionService.post).toHaveBeenCalled();
+    expect(dataService.post).toHaveBeenCalled();
   });
 
 });

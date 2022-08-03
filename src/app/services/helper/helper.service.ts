@@ -1,20 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
-import { ActionService } from '../action/action.service';
+import { DataService } from '../data/data.service';
 @Injectable({
   providedIn: 'root'
 })
 export class HelperService {
 
-  constructor(private actionService: ActionService) { }
+  constructor(private dataService: DataService) { }
 
   getQuestionsetList(requestData: object): Observable<any> {
     const req = {
-      url: 'composite/v3/search',
+      url: 'composite/v1/search',
       data: requestData
     };
-    return this.actionService.post(req).pipe(
+    return this.dataService.post(req).pipe(
       map((response: any) => {
         return response;
       })
@@ -25,10 +25,10 @@ export class HelperService {
     // const param = { fields: this.configService.editorConfig.DEFAULT_PARAMS_FIELDS };
     const param = {};
     const req = {
-      url: 'questionset/v1/read' + questionsetId,
+      url: 'questionset/v1/read/' + questionsetId,
       param: { ...param, ...option.params },
     };
-    return this.actionService.get(req).pipe(
+    return this.dataService.get(req).pipe(
       map((response: any) => {
         return response;
       })
@@ -39,7 +39,7 @@ export class HelperService {
     const req = {
       url: 'channel/v1/read/' + channelId,
     };
-    return this.actionService.get(req).pipe(
+    return this.dataService.get(req).pipe(
       map((response: any) => {
         return response;
       })
@@ -53,6 +53,6 @@ export class HelperService {
         request: reqBody
       }
     };
-    return this.actionService.post(req);
+    return this.dataService.post(req);
   }
 }

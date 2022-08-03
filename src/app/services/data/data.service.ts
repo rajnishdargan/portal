@@ -13,7 +13,7 @@ import * as _ from 'lodash-es';
   providedIn: 'root'
 })
 export class DataService {
-  baseUrl: string;
+  baseUrl: string = '/api/';
   /**
    * angular HttpClient
    */

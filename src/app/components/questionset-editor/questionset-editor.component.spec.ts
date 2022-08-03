@@ -11,7 +11,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 describe('QuestionsetEditorComponent', () => {
   class RouterStub {
     navigate = jasmine.createSpy('navigate');
-    url = ['/questionset'];
+    url = ['/questionset', '/questionset/questionset-list'];
   }
   const mockActivatedRoute = {
     params: of({

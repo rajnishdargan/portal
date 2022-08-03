@@ -35,7 +35,6 @@ export class QuestionsetCreateComponent implements OnInit {
         }
     };
     this.helperService.createContent(requestData).subscribe(res => {
-      console.log(res.result.identifier);
       this.navigateToQuestionset(res.result.identifier);
     }, err => {
       console.log('create content failed ::', err);

@@ -26,9 +26,7 @@ export class UserRolesComponent implements OnInit {
   getAllUsersByRoleType(role): void {
     if (role) {
       this.selectedRoleType = role;
-      // localStorage.setItem('userRole', JSON.stringify(role));
       this.userService.getAllUsersByRoleType(role).subscribe((response) => {
-        console.log('response', response);
         this.dialogRef.close();
         const usersData = _.get(response, 'result.users');
         this.openDialog(usersData);
