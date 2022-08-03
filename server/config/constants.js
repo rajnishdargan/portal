@@ -3,6 +3,7 @@ module.exports = {
         "CHANNEL": "/action/channel/v1/*",
         "FRAMEWORK": "/api/framework/v1/read/*",
         "COMPOSITE": "/action/composite/v3/search",
+        "COMPOSITE_API": "/api/composite/v1/search",
         "QUESTION_LIST": "/api/question/v1/list",
         "USERS": "/action/users",
         "TELEMMETRY": "/action/data/v3/telemetry",
