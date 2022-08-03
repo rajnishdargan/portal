@@ -67,6 +67,7 @@ app.post(routes.API.TELEMMETRY, function (req, res) {
 app.use([
   routes.API.CHANNEL,
   routes.API.COMPOSITE,
+  routes.API.COMPOSITE_API,
   routes.API.FRAMEWORK,
   routes.API.QUESTION_LIST,
   routes.API.QUESTIONSET.CREATE,
