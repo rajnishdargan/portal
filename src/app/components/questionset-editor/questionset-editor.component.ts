@@ -60,7 +60,7 @@ export class QuestionsetEditorComponent implements OnInit {
 
   editorEventListener(event): any {
     if (event.action === 'backContent' || event.action === 'submitContent' || event.action === 'publishContent' || event.action === 'rejectContent') {
-      this.router.navigate(['/questionset/questionset-list']);
+      this.router.navigate(['/questionset/questionset-list', 1]);
     }
   }
 

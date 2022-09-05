@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { HelperService } from '../../services/helper/helper.service';
 import { UserService } from 'src/app/services/user/user.service';
+import { PaginationService } from 'src/app/services/pagination/pagination.service';
+import { IPagination } from 'src/app/interfaces/pagination';
+import { combineLatest as observableCombineLatest, forkJoin } from 'rxjs';
+import { debounceTime, map } from 'rxjs/operators';
+
 import * as _ from 'lodash-es';
 @Component({
   selector: 'app-questionset-list',
@@ -11,20 +16,42 @@ import * as _ from 'lodash-es';
 export class QuestionsetListComponent implements OnInit {
   questionsetList: any;
   userRole: string;
+  totalCount: Number;
+  pager: IPagination;
+  pageNumber = 1;
+  queryParams: any;
+  query: any;
+  noResult = false;
+  public PAGE_LIMIT = 7;
   constructor(
     private router: Router,
     public helperService: HelperService,
-    public userService: UserService) { }
+    public userService: UserService,
+    public paginationService: PaginationService,
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.getAllQuestionsetList();
+    observableCombineLatest(
+      this.activatedRoute.params,
+      this.activatedRoute.queryParams).pipe(
+        debounceTime(10),
+        map(([params, queryParams]) => ({ params, queryParams })
+      ))
+      .subscribe(bothParams => {
+        if (bothParams.params.pageNumber) {
+          this.pageNumber = Number(bothParams.params.pageNumber);
+        }
+        this.queryParams = bothParams.queryParams;
+        this.query = this.queryParams['query'];
+        this.getAllQuestionsetList(this.PAGE_LIMIT, this.pageNumber, bothParams);
+      });
   }
 
   navigatetoHome(): void {
     this.router.navigate(['/']);
   }
 
-  getAllQuestionsetList(): void {
+  getAllQuestionsetList(limit, pageNumber, bothParams): void {
     const creatorStatus = [
       'Draft',
       'FlagDraft',
@@ -52,9 +79,9 @@ export class QuestionsetListComponent implements OnInit {
           objectType: 'Questionset',
           channel: this.userService.userProfile.channelId
         },
-        offset: 0,
-        limit: 200,
-        query: '',
+        limit: limit,
+        offset: (pageNumber - 1) * (limit),
+        query: this.query,
         sort_by: {
           lastUpdatedOn: 'desc'
         }
@@ -68,6 +95,10 @@ export class QuestionsetListComponent implements OnInit {
     this.helperService.getQuestionsetList(req)
       .subscribe((response) => {
         this.questionsetList = _.get(response, 'result.QuestionSet');
+        // this.allContent = _.get(response, 'result.QuestionSet');
+        this.totalCount = response.result.count;
+        this.pager = this.paginationService.getPager(response.result.count, pageNumber, limit);
+        this.noResult = false;
       }, (error) => {
         console.log(error);
       });
@@ -75,6 +106,14 @@ export class QuestionsetListComponent implements OnInit {
 
   navigateToQuestionset(id, status): void {
     this.router.navigate(['/edit/questionset/', id, status]);
+  }
+
+  navigateToPage(page: number): undefined | void {
+    if (page < 1 || page > this.pager.totalPages) {
+      return;
+    }
+    this.pageNumber = page;
+    this.router.navigate(['questionset/questionset-list', this.pageNumber], { queryParams: this.queryParams });
   }
 
 }
