@@ -24,7 +24,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { QuestionsetEditorComponent } from './components/questionset-editor/questionset-editor.component';
-import { CollectionEditorLibraryModule, EditorCursor } from '@project-sunbird/sunbird-collection-editor-v9';
+import { CollectionEditorLibraryModule, EditorCursor } from '@project-sunbird/sunbird-collection-editor';
 import { FilterComponent } from './components/filter/filter.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { RouterModule } from '@angular/router';
