@@ -28,7 +28,7 @@ export const questionSetEditorConfig = {
     endpoint: '/data/v3/telemetry',
     env: 'questionset_editor',
     framework: 'ekstep_ncert_k-12',
-    cloudStorageUrls: ['https://sunbirdstagingpublic.blob.core.windows.net/sunbird-content-staging'],
+    cloudStorageUrls: ['https://sunbirdstagingpublic.blob.core.windows.net/sunbird-content-staging/'],
     cloudStorage: {
       presigned_headers: {
         'x-ms-blob-type': 'BlockBlob'
