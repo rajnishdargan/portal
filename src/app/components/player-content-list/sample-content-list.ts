@@ -2,18 +2,17 @@ import { environment } from "../../../environments/environment";
 
 const devContents = {
   mcq: [
-    { id: 'do_1135404628350730241108', name: 'MCQ Question Set 1', category: 'vertical' },
-    { id: 'do_1135404675650273281117', name: 'MCQ Question Set 2', category: 'vertical' },
-    { id: 'do_1135147715041853441338', name: 'Questionset AFL', category: 'vertical' },
-    { id: 'do_113540307343040512182', name: 'Horizontal QuestionSet 1', category: 'horizontal' },
-    { id: 'do_113540311371423744194', name: 'Grid Layout QuestionSet 1', category: 'grid' },
-    { id: 'do_113455969933246464124', name: 'Test QuestionSet 2022', category: 'solutions' },
+    { id: 'do_213630162487689216137', name: 'MCQ Question Set 1', category: 'vertical' },
+    { id: 'do_213633024930529280150', name: 'MCQ Question Set 2', category: 'vertical' },
+    { id: 'do_213633028694933504159', name: 'Horizontal Layout QuestionSet 1', category: 'horizontal' },
+    { id: 'do_213633032251006976168', name: 'Grid layout QuestionSet 1', category: 'grid' }
   ],
   sa: [
-    { id: 'do_113540296505393152173', name: 'Subjective QS 1' },
-    { id: 'do_1135404720490905601126', name: 'Subjective Questionset 1' },
+    { id: 'do_213633042323161088177', name: 'Subjective question set 1' },
+    { id: 'do_213633045549064192186', name: 'Subjective question set 2' }
   ]
-};
+}
+
 const stagingContents = {
   mcq: [
     { id: 'do_213536668306825216155', name: 'MCQ Question Set 1', category: 'vertical' },
