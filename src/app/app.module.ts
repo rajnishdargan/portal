@@ -73,7 +73,7 @@ import { UsersComponent } from './components/users/users.component';
   providers: [
     {
       provide: QuestionCursor,
-      useClass: QuestionCursorImplementationService
+      useExisting: EditorCursorImplementationService
     },
     {
       provide: EditorCursor,
