@@ -7,7 +7,7 @@ import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
-import { QuestionCursor, QumlLibraryModule } from '@project-sunbird/sunbird-quml-player-v9';
+import { QuestionCursor, QumlLibraryModule } from '@project-sunbird/sunbird-quml-player';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { QuestionCursorImplementationService } from './services/question-cursor-implementation.service';
 import { CommonModule } from '@angular/common';
@@ -24,7 +24,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { QuestionsetEditorComponent } from './components/questionset-editor/questionset-editor.component';
-import { CollectionEditorLibraryModule, EditorCursor } from '@project-sunbird/sunbird-collection-editor-v9';
+import { CollectionEditorLibraryModule, EditorCursor } from '@project-sunbird/sunbird-collection-editor';
 import { FilterComponent } from './components/filter/filter.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { RouterModule } from '@angular/router';
@@ -73,7 +73,7 @@ import { UsersComponent } from './components/users/users.component';
   providers: [
     {
       provide: QuestionCursor,
-      useClass: QuestionCursorImplementationService
+      useExisting: EditorCursorImplementationService
     },
     {
       provide: EditorCursor,

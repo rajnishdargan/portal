@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { QuestionCursor } from '@project-sunbird/sunbird-quml-player-v9';
-import { Question } from '@project-sunbird/sunbird-quml-player-v9/lib/quml-library-interface';
+import { QuestionCursor } from '@project-sunbird/sunbird-quml-player';
+import { Question } from '@project-sunbird/sunbird-quml-player/lib/quml-library-interface';
 import { forkJoin, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
