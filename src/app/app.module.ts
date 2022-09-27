@@ -7,7 +7,7 @@ import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
-import { QuestionCursor, QumlLibraryModule } from '@project-sunbird/sunbird-quml-player-v9';
+import { QuestionCursor, QumlLibraryModule } from '@project-sunbird/sunbird-quml-player';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { QuestionCursorImplementationService } from './services/question-cursor-implementation.service';
 import { CommonModule } from '@angular/common';

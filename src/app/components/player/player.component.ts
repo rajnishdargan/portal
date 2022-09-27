@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { QumlPlayerConfig } from '@project-sunbird/sunbird-quml-player-v9/lib/quml-library-interface';
+import { QumlPlayerConfig } from '@project-sunbird/sunbird-quml-player/lib/quml-library-interface';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NavigationService } from 'src/app/services/navigation.service';
