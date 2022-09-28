@@ -1,4 +1,4 @@
-<div *ngIf="showLoader">
+<div class="px-30 mt-20" *ngIf="showLoader">
   <app-loader></app-loader>
 </div>
 
@@ -40,16 +40,13 @@
     </div>
   </div>
   <div class="ui grid" *ngIf="!questionsetList?.length">
-    <div class="one wide column"></div>
     <div class="ten wide column">
-      <div class="ui two column centered grid no-result-container">
+      <div class="ui two column centered grid">
         <div class="d-flex flex-dc flex-jc-center flex-ai-center column">
           <img alt="" src="{{'assets/images/image/erroricon.png'}}">
-          <div class="mt-16 no-result-text">Questionset not available</div>
-          <ng-content></ng-content>
+          <div class="mt-16">Questionset not available</div>
         </div>
       </div>
     </div>
-    <div class="one wide column"></div>
   </div>
 </div>
