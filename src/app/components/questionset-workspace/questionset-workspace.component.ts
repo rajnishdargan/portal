@@ -19,14 +19,14 @@ export class QuestionsetWorkspaceComponent implements OnInit {
       if (this.userRole === 'creator') {
         this.router.navigate(['/questionset/create']);
       } else {
-        this.router.navigate(['/questionset/questionset-list']);
+        this.router.navigate(['/questionset/questionset-list', 1]);
       }
     }
     if (this.router.url === '/questionset' && this.userRole === 'creator') {
       this.router.navigate(['/questionset/create']);
     }
     if (this.router.url === '/questionset' && this.userRole === 'reviewer') {
-      this.router.navigate(['/questionset/questionset-list']);
+      this.router.navigate(['/questionset/questionset-list', 1]);
     }
   }
 
@@ -36,7 +36,7 @@ export class QuestionsetWorkspaceComponent implements OnInit {
         this.router.navigate(['/questionset/create']);
         break;
       case 'questionset-list':
-        this.router.navigate(['/questionset/questionset-list']);
+        this.router.navigate(['/questionset/questionset-list', 1]);
         break;
       default:
         this.router.navigate(['/']);

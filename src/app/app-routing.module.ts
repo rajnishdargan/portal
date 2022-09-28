@@ -22,7 +22,7 @@ const routes: Routes = [
         path: 'create', component: QuestionsetCreateComponent
       },
       {
-        path: 'questionset-list', component: QuestionsetListComponent
+        path: 'questionset-list/:pageNumber', component: QuestionsetListComponent
       }
     ]
   },
