@@ -45,9 +45,9 @@ describe('QuestionsetCreateComponent', () => {
   });
 
   it ('#createContent() should call #navigateToQuestionset()', () => {
-    const userService = TestBed.get(UserService);
+    const userService = TestBed.inject(UserService);
     spyOnProperty(userService, 'userProfile').and.returnValue(mockUserData);
-    const helperService = TestBed.get(HelperService);
+    const helperService = TestBed.inject(HelperService);
     spyOn(helperService, 'createContent').and.returnValue(of({result: {identifier: 'do_12345'}}));
     spyOn(component, 'navigateToQuestionset').and.callFake(() => {});
     spyOn(component, 'createContent').and.callThrough();
@@ -58,9 +58,9 @@ describe('QuestionsetCreateComponent', () => {
   });
 
   it ('#createContent() should not call #navigateToQuestionset()', () => {
-    const userService = TestBed.get(UserService);
+    const userService = TestBed.inject(UserService);
     spyOnProperty(userService, 'userProfile').and.returnValue(mockUserData);
-    const helperService = TestBed.get(HelperService);
+    const helperService = TestBed.inject(HelperService);
     spyOn(helperService, 'createContent').and.returnValue(throwError({}));
     spyOn(component, 'navigateToQuestionset').and.callFake(() => {});
     spyOn(component, 'createContent').and.callThrough();
