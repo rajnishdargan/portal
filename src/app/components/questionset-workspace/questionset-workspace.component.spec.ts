@@ -14,7 +14,7 @@ describe('QuestionsetWorkspaceComponent', () => {
     await TestBed.configureTestingModule({
       imports: [RouterTestingModule, HttpClientModule],
       declarations: [ QuestionsetWorkspaceComponent ],
-      providers: [],
+      providers: [UserService],
       schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
