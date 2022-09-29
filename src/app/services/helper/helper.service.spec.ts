@@ -14,7 +14,7 @@ describe('HelperService', () => {
       imports: [ HttpClientModule ],
       providers: [DataService]
     });
-    service = TestBed.get(HelperService);
+    service = TestBed.inject(HelperService);
   });
 
   it('should be created', () => {
@@ -22,7 +22,7 @@ describe('HelperService', () => {
   });
 
   it('#getQuestionsetList should call dataService.post', () => {
-    const actionService = TestBed.get(ActionService);
+    const actionService = TestBed.inject(ActionService);
     spyOn(actionService, 'post').and.returnValue(of(mockData.questionsetListResponse));
     spyOn(service, 'getQuestionsetList').and.callThrough();
     const req = {
@@ -37,8 +37,8 @@ describe('HelperService', () => {
   });
 
   it('#createContent() should call actionService.post', () => {
-    const actionService = TestBed.get(ActionService);
-    spyOn(actionService, 'post').and.returnValue(mockData.questionsetCreateResponse);
+    const actionService = TestBed.inject(ActionService);
+    spyOn(actionService, 'post').and.returnValue(of(mockData.questionsetCreateResponse));
     spyOn(service, 'createContent').and.callThrough();
     service.createContent(mockData.questionsetCreateRequest);
     expect(actionService.post).toHaveBeenCalled();

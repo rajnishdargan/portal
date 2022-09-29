@@ -6,10 +6,7 @@ import { UserService } from 'src/app/services/user/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 describe('QuestionsetWorkspaceComponent', () => {
-  class RouterStub {
-    public navigate = jasmine.createSpy('navigate');
-    public url = ['/questionset/create', '/questionset/questionset-list', '/questionset'];
-  }
+
   let component: QuestionsetWorkspaceComponent;
   let fixture: ComponentFixture<QuestionsetWorkspaceComponent>;
 
@@ -17,7 +14,7 @@ describe('QuestionsetWorkspaceComponent', () => {
     await TestBed.configureTestingModule({
       imports: [RouterTestingModule, HttpClientModule],
       declarations: [ QuestionsetWorkspaceComponent ],
-      providers: [{ provide: Router, useClass: RouterStub }, UserService],
+      providers: [UserService],
       schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
@@ -34,16 +31,34 @@ describe('QuestionsetWorkspaceComponent', () => {
   });
 
   it('#nagivateToPage() should route to create page', () => {
+    const router = TestBed.inject(Router);
+    spyOn(router, 'navigate').and.returnValue(Promise.resolve(true));
     spyOn(component, 'nagivateToPage').and.callThrough();
     component.nagivateToPage('create');
-    // tslint:disable-next-line:no-string-literal
-    expect(component['router'].navigate).toHaveBeenCalledWith(['/questionset/create']);
+    expect(router.navigate).toHaveBeenCalledWith(['/questionset/create']);
   });
 
   it('#nagivateToPage() should route to questionset-list page', () => {
+    const router = TestBed.inject(Router);
+    spyOn(router, 'navigate').and.returnValue(Promise.resolve(true));
     spyOn(component, 'nagivateToPage').and.callThrough();
     component.nagivateToPage('questionset-list');
-    // tslint:disable-next-line:no-string-literal
-    expect(component['router'].navigate).toHaveBeenCalledWith(['/questionset/questionset-list']);
+    expect(router.navigate).toHaveBeenCalledWith(['/questionset/questionset-list']);
+  });
+
+  it('#nagivateToPage() should route to default page', () => {
+    const router = TestBed.inject(Router);
+    spyOn(router, 'navigate').and.returnValue(Promise.resolve(true));
+    spyOn(component, 'nagivateToPage').and.callThrough();
+    component.nagivateToPage('xyz');
+    expect(router.navigate).toHaveBeenCalledWith(['/']);
+  });
+
+  it('#navigatetoHome() should route to default page', () => {
+    const router = TestBed.inject(Router);
+    spyOn(router, 'navigate').and.returnValue(Promise.resolve(true));
+    spyOn(component, 'navigatetoHome').and.callThrough();
+    component.navigatetoHome();
+    expect(router.navigate).toHaveBeenCalledWith(['/']);
   });
 });

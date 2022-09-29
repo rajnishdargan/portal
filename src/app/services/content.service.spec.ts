@@ -8,7 +8,7 @@ describe('ContentService', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule]
     });
-    service = TestBed.get(ContentService);
+    service = TestBed.inject(ContentService);
   });
 
   it('should be created', () => {

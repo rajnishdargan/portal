@@ -63,9 +63,9 @@ describe('QuestionsetListComponent', () => {
 
   it('#getAllQuestionsetList() should call helperService.getQuestionsetList', () => {
     component.questionsetList = [];
-    const userService = TestBed.get(UserService);
+    const userService = TestBed.inject(UserService);
     spyOnProperty(userService, 'userProfile').and.returnValue(mockUserData);
-    const helperService = TestBed.get(HelperService);
+    const helperService = TestBed.inject(HelperService);
     spyOn(helperService, 'getQuestionsetList').and.returnValue(of({result: {QuestionSet:
       [{name: 'Test Questionset', status: 'Draft'}]}}));
     spyOn(component, 'getAllQuestionsetList').and.callThrough();

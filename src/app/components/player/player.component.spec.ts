@@ -58,7 +58,7 @@ describe('PlayerComponent', () => {
   });
   it('should call ngOnInit', () => {
     spyOn(component, 'getContent');
-    const navigationService = TestBed.get(NavigationService);
+    const navigationService = TestBed.inject(NavigationService);
     navigationService.nextContents = [{ id: '1', name: 'first' }, { id: '2', name: 'second' }];
     component.ngOnInit();
     expect(component.getContent).toHaveBeenCalled();
@@ -85,7 +85,7 @@ describe('PlayerComponent', () => {
 
   it('should navigate to the player page', () => {
     component.playerConfig = mockPlayerData.playerConfig;
-    const router = TestBed.get(Router);
+    const router = TestBed.inject(Router);
     component.nextContents = [{ id: '1', name: 'first' }, { id: '2', name: 'second' }];
     spyOn(router, 'navigate');
     component.onPlayerEvent({ edata: { type: 'NEXT_CONTENT_PLAY' } });
