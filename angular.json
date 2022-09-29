@@ -83,7 +83,13 @@
               "node_modules/videojs-contrib-quality-levels/dist/videojs-contrib-quality-levels.min.js",
               "node_modules/videojs-http-source-selector/dist/videojs-http-source-selector.min.js",
               "node_modules/@project-sunbird/telemetry-sdk/index.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -113,7 +119,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
