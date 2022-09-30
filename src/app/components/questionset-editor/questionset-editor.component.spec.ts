@@ -74,7 +74,7 @@ describe('QuestionsetEditorComponent', () => {
   });
 
   it('#getEditorMode() should return  value edit', () => {
-    const userService = TestBed.get(UserService);
+    const userService = TestBed.inject(UserService);
     spyOnProperty(userService, 'userProfile').and.returnValue(mockUserData);
     // localStorage.setItem('userRole', JSON.stringify('creator'));
     spyOn(component, 'getEditorMode').and.callThrough();
@@ -83,7 +83,7 @@ describe('QuestionsetEditorComponent', () => {
   });
 
   it('#getEditorMode() should return  value read', () => {
-    const userService = TestBed.get(UserService);
+    const userService = TestBed.inject(UserService);
     spyOnProperty(userService, 'userProfile').and.returnValue(mockUserData);
     spyOn(component, 'getEditorMode').and.callThrough();
     const mode = component.getEditorMode('flagged');
@@ -91,7 +91,7 @@ describe('QuestionsetEditorComponent', () => {
   });
 
   it('#getEditorMode() should return  value read', () => {
-    const userService = TestBed.get(UserService);
+    const userService = TestBed.inject(UserService);
     spyOnProperty(userService, 'userProfile').and.returnValue(mockUserData);
     spyOn(component, 'getEditorMode').and.callThrough();
     const mode = component.getEditorMode('flagreview');
@@ -99,7 +99,7 @@ describe('QuestionsetEditorComponent', () => {
   });
 
   it('#getEditorMode() should return  value review', () => {
-    const userService = TestBed.get(UserService);
+    const userService = TestBed.inject(UserService);
     spyOnProperty(userService, 'userProfile').and.returnValue(mockUserData);
     spyOn(component, 'getEditorMode').and.callThrough();
     const mode = component.getEditorMode('draft');
@@ -107,7 +107,7 @@ describe('QuestionsetEditorComponent', () => {
   });
 
   it('#getEditorMode() should return  value read', () => {
-    const userService = TestBed.get(UserService);
+    const userService = TestBed.inject(UserService);
     spyOnProperty(userService, 'userProfile').and.returnValue(mockUserData);
     spyOn(component, 'getEditorMode').and.callThrough();
     const mode = component.getEditorMode('review');
@@ -115,7 +115,7 @@ describe('QuestionsetEditorComponent', () => {
   });
 
   it('#getEditorMode() should return  value read', () => {
-    const userService = TestBed.get(UserService);
+    const userService = TestBed.inject(UserService);
     spyOnProperty(userService, 'userProfile').and.returnValue(mockUserData);
     spyOn(component, 'getEditorMode').and.callThrough();
     const mode = component.getEditorMode('live');
