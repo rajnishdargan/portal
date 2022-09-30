@@ -19,10 +19,10 @@
         </tr>
       </tbody>
     </table>
-    <div class="ui grid">
+    <div class="py-30 ui grid">
       <div class="two wide column"></div>
       <div class="ten wide column">
-        <div class="pb-10" *ngIf="questionsetList && totalCount > PAGE_LIMIT">
+        <div *ngIf="questionsetList && totalCount > PAGE_LIMIT">
           <div class="ui pagination menu mt-30 right-floated" *ngIf="pager.pages.length ">
             <a [ngClass]="{disabled:pager.currentPage===1 }" class="item " tabindex="0"
               (click)="navigateToPage(1) ">First</a>
