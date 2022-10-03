@@ -4,7 +4,7 @@ import { HelperService } from '../../services/helper/helper.service';
 import { UserService } from 'src/app/services/user/user.service';
 import { PaginationService } from 'src/app/services/pagination/pagination.service';
 import { IPagination } from 'src/app/interfaces/pagination';
-import { combineLatest as observableCombineLatest, forkJoin } from 'rxjs';
+import { combineLatest as observableCombineLatest, forkJoin, Observable } from 'rxjs';
 import { debounceTime, map } from 'rxjs/operators';
 
 import * as _ from 'lodash-es';
@@ -31,13 +31,13 @@ export class QuestionsetListComponent implements OnInit {
     private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    observableCombineLatest(
+    observableCombineLatest([
       this.activatedRoute.params,
-      this.activatedRoute.queryParams).pipe(
-        debounceTime(10),
+      this.activatedRoute.queryParams]).pipe(
         map(([params, queryParams]) => ({ params, queryParams })
       ))
       .subscribe(bothParams => {
+        console.log('bothParams', bothParams);
         if (bothParams.params.pageNumber) {
           this.pageNumber = Number(bothParams.params.pageNumber);
         }
