@@ -6,6 +6,7 @@ import { questionSetEditorConfig } from './data';
 import { of } from 'rxjs';
 import { UserService } from 'src/app/services/user/user.service';
 import { ActionService } from '../../services/action/action.service';
+import { NavigationService } from 'src/app/services/navigation.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 describe('QuestionsetEditorComponent', () => {
@@ -16,8 +17,13 @@ describe('QuestionsetEditorComponent', () => {
   const mockActivatedRoute = {
     params: of({
       id: 'do_12345',
-      status: 'draft'
-    })
+      status: 'Draft'
+    }),
+    snapshot: {params: {
+      id: 'do_12345',
+      status: 'Draft',
+      state: 'create'
+    }}
   };
   const mockUserData = {
     id: '5a587cc1',
@@ -39,7 +45,7 @@ describe('QuestionsetEditorComponent', () => {
       providers: [
         { provide: Router, useClass: RouterStub },
         { provide: ActivatedRoute, useValue: mockActivatedRoute },
-        UserService, ActionService
+        UserService, ActionService, NavigationService
       ],
       schemas: [NO_ERRORS_SCHEMA]
     })
@@ -67,10 +73,11 @@ describe('QuestionsetEditorComponent', () => {
   });
 
   it('#editorEventListener() should route to questionset', () => {
+    const navigationService = TestBed.inject(NavigationService);
+    spyOn(navigationService, 'goBack').and.callFake(() => {});
     spyOn(component, 'editorEventListener').and.callThrough();
     component.editorEventListener({ action: 'backContent' });
-    // tslint:disable-next-line:no-string-literal
-    expect(component['router'].navigate).toHaveBeenCalledWith(['/questionset/questionset-list', 1]);
+    expect(navigationService.goBack).toHaveBeenCalled();
   });
 
   it('#getEditorMode() should return  value edit', () => {

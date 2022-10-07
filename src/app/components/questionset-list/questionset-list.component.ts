@@ -16,7 +16,7 @@ import * as _ from 'lodash-es';
 export class QuestionsetListComponent implements OnInit {
   questionsetList: any;
   userRole: string;
-  totalCount: Number;
+  totalCount: number;
   pager: IPagination;
   pageNumber = 1;
   queryParams: any;
@@ -41,6 +41,7 @@ export class QuestionsetListComponent implements OnInit {
           this.pageNumber = Number(bothParams.params.pageNumber);
         }
         this.queryParams = bothParams.queryParams;
+        // tslint:disable-next-line:no-string-literal
         this.query = this.queryParams['query'];
         this.getAllQuestionsetList(this.PAGE_LIMIT, this.pageNumber, bothParams);
       });
@@ -104,7 +105,12 @@ export class QuestionsetListComponent implements OnInit {
   }
 
   navigateToQuestionset(id, status): void {
-    this.router.navigate(['/edit/questionset/', id, status]);
+    if (this.userRole === 'creator') {
+      this.router.navigate(['/edit/questionset/', id, status, 'edit']);
+    }
+    if (this.userRole === 'reviewer') {
+      this.router.navigate(['/edit/questionset/', id, status, 'review']);
+    }
   }
 
   navigateToPage(page: number): undefined | void {

@@ -42,6 +42,6 @@ export class QuestionsetCreateComponent implements OnInit {
   }
 
   navigateToQuestionset(id): void {
-    this.router.navigate(['/edit/questionset/', id, 'draft']);
+    this.router.navigate(['/edit/questionset/', id, 'Draft', 'create']);
   }
 }

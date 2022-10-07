@@ -69,11 +69,12 @@ describe('QuestionsetListComponent', () => {
   })
 
   it('#navigateToQuestionset() should call router.nagivate', () => {
+    component.userRole = 'creator';
     const router = TestBed.inject(Router);
     spyOn(router, 'navigate').and.returnValue(Promise.resolve(true));
     spyOn(component, 'navigateToQuestionset').and.callThrough();
     component.navigateToQuestionset('do_12345', 'Draft');
-    expect(router.navigate).toHaveBeenCalledWith(['/edit/questionset/', 'do_12345', 'Draft']);
+    expect(router.navigate).toHaveBeenCalledWith(['/edit/questionset/', 'do_12345', 'Draft', 'edit']);
   });
 
   it('#getAllQuestionsetList() should for creator', () => {

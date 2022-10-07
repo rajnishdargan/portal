@@ -3,6 +3,7 @@ import { questionSetEditorConfig } from './data';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/services/user/user.service';
 import { HelperService } from 'src/app/services/helper/helper.service';
+import { NavigationService } from 'src/app/services/navigation.service';
 import * as _ from 'lodash-es';
 @Component({
   selector: 'app-questionset-editor',
@@ -14,12 +15,15 @@ export class QuestionsetEditorComponent implements OnInit {
   public editorConfig: any = questionSetEditorConfig;
   channelData: any;
   questionsetData: any;
+  routeParams: any;
   constructor(
     public router: Router, private activatedRoute: ActivatedRoute,
     public userService: UserService,
-    public helperService: HelperService) { }
+    public helperService: HelperService,
+    public navigationService: NavigationService) { }
 
   ngOnInit(): void {
+    this.routeParams = this.activatedRoute.snapshot.params;
     const host = window.location.origin;
     this.activatedRoute.params.subscribe((params: any) => {
       this.editorConfig.context.identifier = params.id;
@@ -60,7 +64,11 @@ export class QuestionsetEditorComponent implements OnInit {
 
   editorEventListener(event): any {
     if (event.action === 'backContent' || event.action === 'submitContent' || event.action === 'publishContent' || event.action === 'rejectContent') {
-      this.router.navigate(['/questionset/questionset-list', 1]);
+      if (_.has(this.routeParams, 'state') && this.routeParams.state === 'create') {
+        this.router.navigate(['/questionset/questionset-list', 1]);
+      } else {
+        this.navigationService.goBack();
+      }
     }
   }
 

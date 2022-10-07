@@ -27,7 +27,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'edit/questionset/:id/:status', component: QuestionsetEditorComponent
+    path: 'edit/questionset/:id/:status/:state', component: QuestionsetEditorComponent
   },
   {
     path: '', component: HomeComponent
