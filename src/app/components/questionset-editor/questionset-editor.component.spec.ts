@@ -70,7 +70,7 @@ describe('QuestionsetEditorComponent', () => {
     spyOn(component, 'editorEventListener').and.callThrough();
     component.editorEventListener({ action: 'backContent' });
     // tslint:disable-next-line:no-string-literal
-    expect(component['router'].navigate).toHaveBeenCalledWith(['/questionset/questionset-list']);
+    expect(component['router'].navigate).toHaveBeenCalledWith(['/questionset/questionset-list', 1]);
   });
 
   it('#getEditorMode() should return  value edit', () => {

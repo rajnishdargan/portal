@@ -1,7 +1,6 @@
 <div class="px-30 mt-20" *ngIf="showLoader">
   <app-loader></app-loader>
 </div>
-
 <div class="px-30 mt-20" *ngIf="!showLoader">
   <div class="sb-table-container" *ngIf="questionsetList?.length">
     <table class="sb-table sb-table-hover">
@@ -23,7 +22,7 @@
       <div class="two wide column"></div>
       <div class="ten wide column">
         <div *ngIf="questionsetList && totalCount > PAGE_LIMIT">
-          <div class="ui pagination menu mt-30 right-floated" *ngIf="pager.pages.length ">
+          <div class="ui pagination menu my-30 right-floated" *ngIf="pager.pages.length ">
             <a [ngClass]="{disabled:pager.currentPage===1 }" class="item " tabindex="0"
               (click)="navigateToPage(1) ">First</a>
             <a [ngClass]="{disabled:pager.currentPage===1 }" class="item " tabindex="0"
