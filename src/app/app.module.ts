@@ -35,6 +35,7 @@ import { QuestionsetCreateComponent } from './components/questionset-create/ques
 import { UserRolesComponent } from './components/user-roles/user-roles.component';
 import { UsersComponent } from './components/users/users.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { ListFilterComponent } from './components/list-filter/list-filter.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +52,8 @@ import { LoaderComponent } from './components/loader/loader.component';
     QuestionsetCreateComponent,
     UserRolesComponent,
     UsersComponent,
-    LoaderComponent
+    LoaderComponent,
+    ListFilterComponent
   ],
   imports: [
     BrowserModule,
