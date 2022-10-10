@@ -34,6 +34,7 @@ import { QuestionsetWorkspaceComponent } from './components/questionset-workspac
 import { QuestionsetCreateComponent } from './components/questionset-create/questionset-create.component';
 import { UserRolesComponent } from './components/user-roles/user-roles.component';
 import { UsersComponent } from './components/users/users.component';
+import { LoaderComponent } from './components/loader/loader.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +50,8 @@ import { UsersComponent } from './components/users/users.component';
     QuestionsetWorkspaceComponent,
     QuestionsetCreateComponent,
     UserRolesComponent,
-    UsersComponent
+    UsersComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,

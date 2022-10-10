@@ -43,7 +43,7 @@ describe('QuestionsetWorkspaceComponent', () => {
     spyOn(router, 'navigate').and.returnValue(Promise.resolve(true));
     spyOn(component, 'nagivateToPage').and.callThrough();
     component.nagivateToPage('questionset-list');
-    expect(router.navigate).toHaveBeenCalledWith(['/questionset/questionset-list']);
+    expect(router.navigate).toHaveBeenCalledWith(['/questionset/questionset-list', 1]);
   });
 
   it('#nagivateToPage() should route to default page', () => {

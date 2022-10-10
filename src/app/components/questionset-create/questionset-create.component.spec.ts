@@ -74,6 +74,6 @@ describe('QuestionsetCreateComponent', () => {
     spyOn(component, 'navigateToQuestionset').and.callThrough();
     component.navigateToQuestionset('do_12345');
     // tslint:disable-next-line:no-string-literal
-    expect(component['router'].navigate).toHaveBeenCalledWith(['/edit/questionset/', 'do_12345', 'draft']);
+    expect(component['router'].navigate).toHaveBeenCalledWith(['/edit/questionset/', 'do_12345', 'Draft', 'create']);
   });
 });
