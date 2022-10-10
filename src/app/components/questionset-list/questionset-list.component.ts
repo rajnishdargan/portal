@@ -52,6 +52,7 @@ export class QuestionsetListComponent implements OnInit {
   }
 
   getAllQuestionsetList(limit, pageNumber, bothParams): void {
+    this.showLoader = true;
     const creatorStatus = [
       'Draft',
       'FlagDraft',

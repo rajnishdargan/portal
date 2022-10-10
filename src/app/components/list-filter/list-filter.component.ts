@@ -25,10 +25,11 @@ export class ListFilterComponent implements OnInit {
     this.route.onSameUrlNavigation = 'reload';
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.activatedRoute.queryParams
       .subscribe(params => {
         this.queryParams = { ...params };
+        // tslint:disable-next-line:no-string-literal
         this.query = this.queryParams['query'];
         _.forIn(params, (value, key) => {
           if (typeof value === 'string' && key !== 'query') {
@@ -36,7 +37,7 @@ export class ListFilterComponent implements OnInit {
           }
         });
       });
-      this.modelChanged.pipe(debounceTime(1000),
+    this.modelChanged.pipe(debounceTime(1000),
       distinctUntilChanged(),
       flatMap(search => of(search).pipe(delay(500)))
       ).
@@ -46,16 +47,16 @@ export class ListFilterComponent implements OnInit {
       });
   }
 
-  public handleSearch() {
+  public handleSearch(): any {
     if (!_.isEmpty(this.query)) {
-      this.queryParams['query'] = this.query;
+      this.queryParams.query = this.query;
     } else {
-      delete this.queryParams['query'];
+      delete this.queryParams.query;
     }
     this.route.navigate([this.redirectUrl], { queryParams: this.queryParams});
   }
 
-  keyup(event) {
+  keyup(event): void {
     this.query = event;
     this.modelChanged.next(this.query);
     // this.handleSearch();
