@@ -3,7 +3,6 @@ import { QuestionCursor } from '@project-sunbird/sunbird-quml-player';
 import { Question } from '@project-sunbird/sunbird-quml-player/lib/quml-library-interface';
 import { forkJoin, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
 import { ApiEndPoints } from '../app.constant';
 import { ContentService } from './content.service';
 
@@ -12,7 +11,6 @@ import { ContentService } from './content.service';
 })
 export class QuestionCursorImplementationService implements QuestionCursor {
 
-  baseUrl: string = environment.baseUrl;
   constructor(private contentService: ContentService) { }
 
   getQuestions(identifiers: string[], parentId?: string): Observable<Question> {
