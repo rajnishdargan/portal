@@ -23,6 +23,8 @@ export class QuestionsetListComponent implements OnInit {
   query: any;
   public PAGE_LIMIT = 9;
   showLoader = true;
+  showDeleteConfirmationPopUp = false;
+  currentQuestionsetId: string;
   constructor(
     private router: Router,
     public helperService: HelperService,
@@ -120,6 +122,34 @@ export class QuestionsetListComponent implements OnInit {
     }
     this.pageNumber = page;
     this.router.navigate(['questionset/questionset-list', this.pageNumber], { queryParams: this.queryParams });
+  }
+
+  deleteConfirmModal(identifier): void {
+    this.currentQuestionsetId = identifier;
+    this.showDeleteConfirmationPopUp = true;
+  }
+
+  delete(): void {
+    this.showLoader = true;
+    this.helperService.deleteQuestionset(this.currentQuestionsetId).subscribe((data) => {
+      this.showDeleteConfirmationPopUp = false;
+      if (data.params.status === 'successful') {
+        this.showLoader = false;
+        this.questionsetList = this.removeQuestionset(this.questionsetList, this.currentQuestionsetId);
+        if (this.questionsetList.length === 0) {
+          this.ngOnInit();
+        }
+      }
+    },
+    (err) => {
+      this.showLoader = false;
+    });
+  }
+
+  removeQuestionset(questionsetList, questionsetId): any {
+    return questionsetList.filter((content) => {
+      return questionsetId.indexOf(content.identifier) === -1;
+    });
   }
 
 }

@@ -9,13 +9,18 @@
         <tr>
           <th>Questionset Name</th>
           <th>Status</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let questionset of questionsetList let i = index" [id]="i"
-          (click)="navigateToQuestionset(questionset.identifier, questionset.status)">
-          <td>{{questionset?.name}}</td>
+        <tr *ngFor="let questionset of questionsetList">
+          <td (click)="navigateToQuestionset(questionset.identifier, questionset.status)">{{questionset?.name}}</td>
           <td>{{questionset?.status}}</td>
+          <td>
+            <i *ngIf="(questionset.status === 'Review' || questionset.status === 'Draft')" class="trash large icon"
+            tabindex="0" (click)="deleteConfirmModal(questionset.identifier);">
+            </i>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -50,3 +55,23 @@
     </div>
   </div>
 </div>
+<sui-modal *ngIf="showDeleteConfirmationPopUp" [mustScroll]="false" [isClosable]="true"
+[transitionDuration]="0" [size]="'small'" class="sb-modal sb-error"
+(dismissed)="showDeleteConfirmationPopUp = !showDeleteConfirmationPopUp" #modal>
+  <div class="sb-modal-header">
+    Delete Question Set
+  </div>
+  <div class="sb-modal-content">
+      <div>
+        Are you sure to delete this question set?
+      </div>
+  </div>
+  <div class="sb-modal-actions">
+    <button type="button" class="sb-btn sb-btn-normal sb-btn-outline-error mr-10" (click)="delete();">
+      Yes
+    </button>
+    <button type="button" class="sb-btn sb-btn-normal sb-btn-error mr-10" (click)="showDeleteConfirmationPopUp = !showDeleteConfirmationPopUp">
+      No
+    </button>
+  </div>
+</sui-modal>
