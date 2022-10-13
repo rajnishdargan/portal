@@ -104,13 +104,12 @@ app.use([
 
 app.use([
   routes.API.LEARNER.FRAMEWORK,
-  routes.API.LEARNER.QUESTIONSET_HIERARCHY,
-  routes.API.CHANNEL
+  routes.API.LEARNER.QUESTIONSET_HIERARCHY
 ], proxy(BASE_URL, {
   https: true,
   proxyReqPathResolver: function (req) {
-    console.log('proxyReqPathResolver ', urlHelper.parse(req.url).path);
-    return urlHelper.parse(req.url).path;
+    const originalUrl = req.originalUrl.replace("/learner/", "/api/");
+    return urlHelper.parse(originalUrl).path;
   },
   proxyReqOptDecorator: proxyUtils.decoratePublicRequestHeaders()
 }));
