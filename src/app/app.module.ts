@@ -37,6 +37,8 @@ import { UserRolesComponent } from './components/user-roles/user-roles.component
 import { UsersComponent } from './components/users/users.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { ListFilterComponent } from './components/list-filter/list-filter.component';
+
+import { ToasterService } from '../app/services/toaster/toaster.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -84,7 +86,8 @@ import { ListFilterComponent } from './components/list-filter/list-filter.compon
     {
       provide: EditorCursor,
       useExisting: EditorCursorImplementationService
-    }
+    },
+    ToasterService
   ],
   bootstrap: [AppComponent]
 })

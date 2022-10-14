@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HelperService } from '../../services/helper/helper.service';
 import { UserService } from 'src/app/services/user/user.service';
+import { ToasterService } from 'src/app/services/toaster/toaster.service';
 import { PaginationService } from 'src/app/services/pagination/pagination.service';
 import { IPagination } from 'src/app/interfaces/pagination';
 import { combineLatest as observableCombineLatest } from 'rxjs';
@@ -26,11 +27,10 @@ export class QuestionsetListComponent implements OnInit {
   showDeleteConfirmationPopUp = false;
   currentQuestionsetId: string;
   constructor(
-    private router: Router,
-    public helperService: HelperService,
-    public userService: UserService,
-    public paginationService: PaginationService,
-    private activatedRoute: ActivatedRoute) { }
+    private router: Router, public helperService: HelperService,
+    public userService: UserService, public paginationService: PaginationService,
+    private activatedRoute: ActivatedRoute, private toasterService: ToasterService) {
+    }
 
   ngOnInit(): void {
     observableCombineLatest([
@@ -139,6 +139,7 @@ export class QuestionsetListComponent implements OnInit {
         if (this.questionsetList.length === 0) {
           this.ngOnInit();
         }
+        this.toasterService.success('Questionset is deleted successfully.');
       }
     },
     (err) => {
