@@ -4,14 +4,15 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ListFilterComponent } from './list-filter.component';
 import { of } from 'rxjs';
 
-xdescribe('ListFilterComponent', () => {
+describe('ListFilterComponent', () => {
   let component: ListFilterComponent;
   let fixture: ComponentFixture<ListFilterComponent>;
   const mockActivatedRoute = {
     params: of({
       id: 'do_12345',
       status: 'draft'
-    })
+    }),
+    queryParams: of({}),
   };
 
   beforeEach(async () => {

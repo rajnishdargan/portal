@@ -57,12 +57,8 @@ export class QuestionsetListComponent implements OnInit {
     this.showLoader = true;
     const creatorStatus = [
       'Draft',
-      'FlagDraft',
       'Review',
-      'flagged',
-      'Live',
-      'Unlisted',
-      'FlagReview'
+      'Live'
     ];
     const reviewerStatus = ['Review', 'FlagReview'];
     let QuestionSetStatus = [];

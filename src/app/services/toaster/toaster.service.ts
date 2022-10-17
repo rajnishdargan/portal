@@ -27,7 +27,7 @@ export class ToasterService {
     this.iziToast = iziToast; // global object
   }
 
-  InfoToasterCritical(title: string, message: string) {
+  InfoToasterCritical(title: string, message: string): void {
     iziToast.show({
       title,
       message,
@@ -44,7 +44,7 @@ export class ToasterService {
    * @memberOf Services.toasterService
    * @param string  message - Success message
    */
-  success(title: string, message?: string) {
+  success(title: string, message?: string): void {
     this.iziToast.success({
         title,
         message: message ? message : '',
@@ -58,7 +58,7 @@ export class ToasterService {
    * @memberOf Services.toasterService
    * @param string  message - Info message
    */
-  info(title: string, message?: string) {
+  info(title: string, message?: string): void {
     this.iziToast.info({
       title,
       message: message ? message : '',
@@ -74,7 +74,7 @@ export class ToasterService {
    * @memberOf Services.toasterService
    * @param string  message - Error message
    */
-  error(title: string, message?: string) {
+  error(title: string, message?: string): void {
     this.iziToast.error({
       title,
       message: message ? message : '',
@@ -88,7 +88,7 @@ export class ToasterService {
    * @memberOf Services.toasterService
    * @param string  message - Warning message
    */
-  warning(title: string, message?: string) {
+  warning(title: string, message?: string): void {
     this.iziToast.warning({
       title,
       message: message ? message : '',
@@ -102,7 +102,7 @@ export class ToasterService {
    * @memberOf Services.toasterService
    * @param string  message - Simple info message
    */
-     simpleInfo(title: string, position?, message?: string) {
+     simpleInfo(title: string, position?, message?: string): void {
       this.iziToast.info({
         title,
         message: message ? message : '',
