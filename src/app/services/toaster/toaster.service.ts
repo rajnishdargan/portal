@@ -1,51 +1,112 @@
 import { Injectable } from '@angular/core';
 declare const iziToast: any;
-
-@Injectable()
+/**
+ * Service to show toaster
+ *
+ */
+@Injectable({
+  providedIn: 'root'
+})
 export class ToasterService {
 
-  public iziToast: any;
-
+  /**
+   * To show toaster messages
+   */
+  private iziToast: any;
+  private options = {
+    position: 'topCenter',
+    titleSize: '18',
+    timeout: 6000,
+    transitionIn: 'flipInX',
+    transitionOut: 'flipOutX'
+  };
+  /**
+	  * Constructor to create injected service(s) object
+	  */
   constructor() {
-    this.iziToast = iziToast;
-    this.iziToast.settings({
+    this.iziToast = iziToast; // global object
+  }
+
+  InfoToasterCritical(title: string, message: string) {
+    iziToast.show({
+      title,
+      message,
+      class: 'sb-toaster sb-toast-success sb-toast-normal',
       position: 'topCenter',
-      titleSize: '18'
+      timeout: 6000,
+      transitionIn: 'flipInX',
+      transitionOut: 'flipOutX'
     });
   }
 
-  success(message: string): void {
+  /**
+   * Format success message
+   * @memberOf Services.toasterService
+   * @param string  message - Success message
+   */
+  success(title: string, message?: string) {
     this.iziToast.success({
-      title: message,
-      class: 'sb-toaster sb-toast-success'
-    });
+        title,
+        message: message ? message : '',
+        class: 'sb-toaster sb-toast-normal sb-toast-success',
+         ...this.options
+        });
   }
 
-  info(message: string): void {
+  /**
+   * Format information message
+   * @memberOf Services.toasterService
+   * @param string  message - Info message
+   */
+  info(title: string, message?: string) {
     this.iziToast.info({
-      title: message,
-      class: 'sb-toaster sb-toast-info'
+      title,
+      message: message ? message : '',
+      class: 'sb-toaster sb-toast-normal sb-toast-info',
+       ...this.options
     });
   }
 
-  error(message: string): void {
+
+
+  /**
+   * Format error message
+   * @memberOf Services.toasterService
+   * @param string  message - Error message
+   */
+  error(title: string, message?: string) {
     this.iziToast.error({
-      title: message,
-      class: 'sb-toaster sb-toast-error'
+      title,
+      message: message ? message : '',
+      class: 'sb-toaster sb-toast-normal sb-toast-danger',
+       ...this.options
     });
   }
 
-  warning(message: string): void {
+  /**
+   * Format warning message
+   * @memberOf Services.toasterService
+   * @param string  message - Warning message
+   */
+  warning(title: string, message?: string) {
     this.iziToast.warning({
-      title: message,
-      class: 'sb-toaster sb-toast-warning'
+      title,
+      message: message ? message : '',
+      class: 'sb-toaster sb-toast-normal sb-toast-warning',
+       ...this.options
     });
   }
 
-  custom(config: any): void {
-    this.iziToast.show({
-      class: config.class,
-      message: config.message
-    });
-  }
+  /**
+   * Simple info message
+   * @memberOf Services.toasterService
+   * @param string  message - Simple info message
+   */
+     simpleInfo(title: string, position?, message?: string) {
+      this.iziToast.info({
+        title,
+        message: message ? message : '',
+        position: position ? position : 'topCenter'
+      });
+    }
 }

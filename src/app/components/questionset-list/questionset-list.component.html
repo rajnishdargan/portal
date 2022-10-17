@@ -17,7 +17,7 @@
           <td (click)="navigateToQuestionset(questionset.identifier, questionset.status)">{{questionset?.name}}</td>
           <td>{{questionset?.status}}</td>
           <td>
-            <i *ngIf="(questionset.status === 'Review' || questionset.status === 'Draft')" class="trash large icon"
+            <i *ngIf="!(questionset.pkgVersion && questionset.pkgVersion > 0 && (questionset.status === 'Review' || questionset.status === 'Draft'))" class="trash large icon"
             tabindex="0" (click)="deleteConfirmModal(questionset.identifier);">
             </i>
           </td>

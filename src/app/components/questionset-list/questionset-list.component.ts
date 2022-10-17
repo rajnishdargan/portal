@@ -79,7 +79,7 @@ export class QuestionsetListComponent implements OnInit {
       request: {
         filters: {
           status: QuestionSetStatus,
-          objectType: 'Questionset',
+          objectType: ['Questionset', 'QuestionsetImage'],
           channel: this.userService.userProfile.channelId
         },
         limit: limit,
