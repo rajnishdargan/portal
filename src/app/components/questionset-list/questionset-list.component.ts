@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HelperService } from '../../services/helper/helper.service';
 import { UserService } from 'src/app/services/user/user.service';
+import { ToasterService } from 'src/app/services/toaster/toaster.service';
 import { PaginationService } from 'src/app/services/pagination/pagination.service';
 import { IPagination } from 'src/app/interfaces/pagination';
 import { combineLatest as observableCombineLatest } from 'rxjs';
@@ -23,12 +24,13 @@ export class QuestionsetListComponent implements OnInit {
   query: any;
   public PAGE_LIMIT = 9;
   showLoader = true;
+  showDeleteConfirmationPopUp = false;
+  currentQuestionsetId: string;
   constructor(
-    private router: Router,
-    public helperService: HelperService,
-    public userService: UserService,
-    public paginationService: PaginationService,
-    private activatedRoute: ActivatedRoute) { }
+    private router: Router, public helperService: HelperService,
+    public userService: UserService, public paginationService: PaginationService,
+    private activatedRoute: ActivatedRoute, private toasterService: ToasterService) {
+    }
 
   ngOnInit(): void {
     observableCombineLatest([
@@ -52,6 +54,7 @@ export class QuestionsetListComponent implements OnInit {
   }
 
   getAllQuestionsetList(limit, pageNumber, bothParams): void {
+    this.showLoader = true;
     const creatorStatus = [
       'Draft',
       'FlagDraft',
@@ -76,7 +79,7 @@ export class QuestionsetListComponent implements OnInit {
       request: {
         filters: {
           status: QuestionSetStatus,
-          objectType: 'Questionset',
+          objectType: ['Questionset', 'QuestionsetImage'],
           channel: this.userService.userProfile.channelId
         },
         limit: limit,
@@ -119,6 +122,35 @@ export class QuestionsetListComponent implements OnInit {
     }
     this.pageNumber = page;
     this.router.navigate(['questionset/questionset-list', this.pageNumber], { queryParams: this.queryParams });
+  }
+
+  deleteConfirmModal(identifier): void {
+    this.currentQuestionsetId = identifier;
+    this.showDeleteConfirmationPopUp = true;
+  }
+
+  delete(): void {
+    this.showLoader = true;
+    this.helperService.deleteQuestionset(this.currentQuestionsetId).subscribe((data) => {
+      this.showDeleteConfirmationPopUp = false;
+      if (data.params.status === 'successful') {
+        this.showLoader = false;
+        this.questionsetList = this.removeQuestionset(this.questionsetList, this.currentQuestionsetId);
+        if (this.questionsetList.length === 0) {
+          this.ngOnInit();
+        }
+        this.toasterService.success('Questionset is deleted successfully.');
+      }
+    },
+    (err) => {
+      this.showLoader = false;
+    });
+  }
+
+  removeQuestionset(questionsetList, questionsetId): any {
+    return questionsetList.filter((content) => {
+      return questionsetId.indexOf(content.identifier) === -1;
+    });
   }
 
 }

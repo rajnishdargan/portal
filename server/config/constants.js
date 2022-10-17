@@ -26,7 +26,8 @@ module.exports = {
             "HIERARCHY_READ": "/action/questionset/v1/hierarchy/*",
             "REVIEW": "/action/questionset/v1/review/*",
             "REJECT": "/action/questionset/v1/reject/*",
-            "PUBLISH": "/action/questionset/v1/publish/*"
+            "PUBLISH": "/action/questionset/v1/publish/*",
+            "RETIRE": "/action/questionset/v1/retire/*"
         },
         "ASSET": {
             "CREATE": "/action/asset/v1/create",
