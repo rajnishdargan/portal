@@ -8,15 +8,15 @@
       <thead>
         <tr>
           <th>Questionset Name</th>
-          <th>Status</th>
-          <th></th>
+          <th class="text-center">Status</th>
+          <th class="text-center"></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let questionset of questionsetList">
           <td (click)="navigateToQuestionset(questionset.identifier, questionset.status)">{{questionset?.name}}</td>
-          <td>{{questionset?.status}}</td>
-          <td>
+          <td class="text-center">{{questionset?.status}}</td>
+          <td class="text-center">
             <i *ngIf="!(questionset.pkgVersion && questionset.pkgVersion > 0 && (questionset.status === 'Review' || questionset.status === 'Draft'))" class="trash large icon"
             tabindex="0" (click)="deleteConfirmModal(questionset.identifier);">
             </i>

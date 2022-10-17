@@ -1,13 +1,13 @@
 .left-content {
   width: 20%;
-  background-color: #f3f8ff;
+  background-color: #e5edf5;
   padding: 12px 0 0 12px;
   height: calc(100vh - 178px);
 }
 
 .right-content {
   width: 80%;
-  background-color: #fff;
+  background-color: #e5edf5;
 }
 
 .container {
@@ -31,7 +31,7 @@
 }
 
 .sb-sidebar-menu ul li.active {
-  background-color: #fff;
+  background: linear-gradient(270deg,#d0d0d000 0,#fff 100%);
   color: #0288D1;
 }
 
@@ -41,7 +41,7 @@
 }
 
 .sb-sidebar-menu ul li:hover {
-  background-color: #fff;
+  background-color: linear-gradient(270deg, #d0d0d000 0, #fff 100%);
 }
 
 .sb-table {
