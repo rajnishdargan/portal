@@ -36,13 +36,9 @@ import { QuestionsetCreateComponent } from './components/questionset-create/ques
 import { UserRolesComponent } from './components/user-roles/user-roles.component';
 import { UsersComponent } from './components/users/users.component';
 import { LoaderComponent } from './components/loader/loader.component';
-<<<<<<< HEAD
-
-=======
 import { ListFilterComponent } from './components/list-filter/list-filter.component';
 
 import { ToasterService } from '../app/services/toaster/toaster.service';
->>>>>>> af6ad2eedb42e8b9f5b9dbff9871cfb718ad2235
 @NgModule({
   declarations: [
     AppComponent,
@@ -80,11 +76,7 @@ import { ToasterService } from '../app/services/toaster/toaster.service';
     BrowserAnimationsModule,
     CollectionEditorLibraryModule,
     AppRoutingModule,
-<<<<<<< HEAD
-    MatMenuModule
-=======
     SuiModule
->>>>>>> af6ad2eedb42e8b9f5b9dbff9871cfb718ad2235
   ],
   providers: [
     {
