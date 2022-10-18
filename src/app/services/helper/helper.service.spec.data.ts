@@ -104,5 +104,15 @@ export const mockData = {
             identifier: 'do_2135735796138557441690',
             versionKey: '1656931105211'
         }
+    },
+    questionsetDeleteResponse: {
+        params: {
+            status: 'successful'
+        },
+        responseCode: 'OK',
+        result: {
+            identifier: 'do_2136479707618426881375',
+            versionKey: '1666012055897'
+        }
     }
 };

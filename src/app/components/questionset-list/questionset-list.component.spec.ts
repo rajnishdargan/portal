@@ -8,6 +8,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
 import { PaginationService } from 'src/app/services/pagination/pagination.service';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
 describe('QuestionsetListComponent', () => {
   const mockUserData = {
     id: '5a587cc1',
@@ -38,7 +40,8 @@ describe('QuestionsetListComponent', () => {
             params: of({ pageNumber: '1' })
           }
         },
-      ]
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
       .compileComponents();
   });

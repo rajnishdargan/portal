@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as _ from 'lodash-es';
 import { Subject, of} from 'rxjs';
-import { debounceTime, distinctUntilChanged, delay, flatMap } from 'rxjs/operators';
+import { debounceTime } from 'rxjs/operators';
 @Component({
   selector: 'app-list-filter',
   templateUrl: './list-filter.component.html',
@@ -31,16 +31,8 @@ export class ListFilterComponent implements OnInit {
         this.queryParams = { ...params };
         // tslint:disable-next-line:no-string-literal
         this.query = this.queryParams['query'];
-        _.forIn(params, (value, key) => {
-          if (typeof value === 'string' && key !== 'query') {
-            this.queryParams[key] = [value];
-          }
-        });
       });
-    this.modelChanged.pipe(debounceTime(1000),
-      distinctUntilChanged(),
-      flatMap(search => of(search).pipe(delay(500)))
-      ).
+    this.modelChanged.pipe(debounceTime(1000)).
       subscribe(query => {
         this.query = query;
         this.handleSearch();
@@ -59,6 +51,5 @@ export class ListFilterComponent implements OnInit {
   keyup(event): void {
     this.query = event;
     this.modelChanged.next(this.query);
-    // this.handleSearch();
   }
 }
