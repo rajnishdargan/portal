@@ -1,3 +1,4 @@
+<app-list-filter></app-list-filter>
 <div class="px-30 mt-20" *ngIf="showLoader">
   <app-loader></app-loader>
 </div>
@@ -7,14 +8,20 @@
       <thead>
         <tr>
           <th>Questionset Name</th>
-          <th>Status</th>
+          <th class="text-center">Status</th>
+          <th class="text-center"></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let questionset of questionsetList let i = index" [id]="i"
-          (click)="navigateToQuestionset(questionset.identifier, questionset.status)">
-          <td>{{questionset?.name}}</td>
-          <td>{{questionset?.status}}</td>
+        <tr *ngFor="let questionset of questionsetList">
+          <td (click)="navigateToQuestionset(questionset.identifier, questionset.status)">{{questionset?.name}}</td>
+          <td class="text-center">{{questionset?.status}}</td>
+          <td class="text-center">
+            <i *ngIf="!(questionset.pkgVersion && questionset.pkgVersion > 0 && (questionset.status === 'Review' ||
+              questionset.status === 'Draft')) && (userService.userProfile.id === questionset.createdBy)" class="trash large icon"
+            tabindex="0" (click)="openDeleteDialog(template, questionset.identifier);">
+            </i>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -49,3 +56,12 @@
     </div>
   </div>
 </div>
+
+<ng-template #template>
+  <h2 mat-dialog-title>Delete Question Set</h2>
+  <mat-dialog-content>Are you sure to delete this question set?</mat-dialog-content>
+  <mat-dialog-actions class="mat-dialog-actions mat-dialog-actions-align-end">
+    <button mat-button mat-dialog-close color="warn">No</button>
+    <button mat-button (click)="deleteQuestionset()">Yes</button>
+  </mat-dialog-actions>
+ </ng-template>

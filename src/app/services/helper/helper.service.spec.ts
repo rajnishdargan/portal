@@ -44,4 +44,12 @@ describe('HelperService', () => {
     expect(actionService.post).toHaveBeenCalled();
   });
 
+  it('#deleteQuestionset() should call actionService.delete', () => {
+    const actionService = TestBed.inject(ActionService);
+    spyOn(actionService, 'delete').and.returnValue(of(mockData.questionsetDeleteResponse));
+    spyOn(service, 'deleteQuestionset').and.callThrough();
+    service.deleteQuestionset('do_2136479707618426881375');
+    expect(actionService.delete).toHaveBeenCalled();
+  });
+
 });

@@ -8,6 +8,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
 import { PaginationService } from 'src/app/services/pagination/pagination.service';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
+
 describe('QuestionsetListComponent', () => {
   const mockUserData = {
     id: '5a587cc1',
@@ -24,7 +28,7 @@ describe('QuestionsetListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientModule, RouterTestingModule],
+      imports: [HttpClientModule, RouterTestingModule, MatDialogModule],
       declarations: [QuestionsetListComponent],
       providers: [
         HelperService,
@@ -38,7 +42,9 @@ describe('QuestionsetListComponent', () => {
             params: of({ pageNumber: '1' })
           }
         },
-      ]
+        { provide: MatDialogRef, useValue: {} }
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
       .compileComponents();
   });

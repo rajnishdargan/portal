@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HelperService } from '../../services/helper/helper.service';
 import { UserService } from 'src/app/services/user/user.service';
+import { ToasterService } from 'src/app/services/toaster/toaster.service';
 import { PaginationService } from 'src/app/services/pagination/pagination.service';
 import { IPagination } from 'src/app/interfaces/pagination';
 import { combineLatest as observableCombineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
+import {MatDialog } from '@angular/material/dialog';
 
 import * as _ from 'lodash-es';
 @Component({
@@ -23,12 +25,14 @@ export class QuestionsetListComponent implements OnInit {
   query: any;
   public PAGE_LIMIT = 9;
   showLoader = true;
+  currentQuestionsetId: string;
+  dialogRef: any;
   constructor(
-    private router: Router,
-    public helperService: HelperService,
-    public userService: UserService,
-    public paginationService: PaginationService,
-    private activatedRoute: ActivatedRoute) { }
+    private router: Router, public helperService: HelperService,
+    public userService: UserService, public paginationService: PaginationService,
+    private activatedRoute: ActivatedRoute, private toasterService: ToasterService,
+    private dialog: MatDialog) {
+    }
 
   ngOnInit(): void {
     observableCombineLatest([
@@ -52,14 +56,11 @@ export class QuestionsetListComponent implements OnInit {
   }
 
   getAllQuestionsetList(limit, pageNumber, bothParams): void {
+    this.showLoader = true;
     const creatorStatus = [
       'Draft',
-      'FlagDraft',
       'Review',
-      'flagged',
-      'Live',
-      'Unlisted',
-      'FlagReview'
+      'Live'
     ];
     const reviewerStatus = ['Review', 'FlagReview'];
     let QuestionSetStatus = [];
@@ -76,7 +77,7 @@ export class QuestionsetListComponent implements OnInit {
       request: {
         filters: {
           status: QuestionSetStatus,
-          objectType: 'Questionset',
+          objectType: ['Questionset', 'QuestionsetImage'],
           channel: this.userService.userProfile.channelId
         },
         limit: limit,
@@ -121,4 +122,36 @@ export class QuestionsetListComponent implements OnInit {
     this.router.navigate(['questionset/questionset-list', this.pageNumber], { queryParams: this.queryParams });
   }
 
+  openDeleteDialog(templateRef, questionsetId): void {
+    this.currentQuestionsetId = questionsetId;
+    this.dialogRef = this.dialog.open(templateRef, {
+     width: '500px'
+   });
+  }
+
+  deleteQuestionset(): void {
+    this.showLoader = true;
+    this.helperService.deleteQuestionset(this.currentQuestionsetId).subscribe((data) => {
+      if (data.params.status === 'successful') {
+        this.dialogRef.close();
+        this.showLoader = false;
+        this.questionsetList = this.removeQuestionset(this.questionsetList, this.currentQuestionsetId);
+        if (this.questionsetList.length === 0) {
+          this.ngOnInit();
+        }
+        this.toasterService.success('Questionset is deleted successfully.');
+      }
+    },
+    (err) => {
+      this.dialogRef.close();
+      this.showLoader = false;
+      this.toasterService.success('Something went wrong.');
+    });
+  }
+
+  removeQuestionset(questionsetList, questionsetId): any {
+    return questionsetList.filter((content) => {
+      return questionsetId.indexOf(content.identifier) === -1;
+    });
+  }
 }
