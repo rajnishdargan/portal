@@ -7,6 +7,7 @@ import { PaginationService } from 'src/app/services/pagination/pagination.servic
 import { IPagination } from 'src/app/interfaces/pagination';
 import { combineLatest as observableCombineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
+import {MatDialog } from '@angular/material/dialog';
 
 import * as _ from 'lodash-es';
 @Component({
@@ -24,12 +25,13 @@ export class QuestionsetListComponent implements OnInit {
   query: any;
   public PAGE_LIMIT = 9;
   showLoader = true;
-  showDeleteConfirmationPopUp = false;
   currentQuestionsetId: string;
+  dialogRef: any;
   constructor(
     private router: Router, public helperService: HelperService,
     public userService: UserService, public paginationService: PaginationService,
-    private activatedRoute: ActivatedRoute, private toasterService: ToasterService) {
+    private activatedRoute: ActivatedRoute, private toasterService: ToasterService,
+    private dialog: MatDialog) {
     }
 
   ngOnInit(): void {
@@ -120,16 +122,18 @@ export class QuestionsetListComponent implements OnInit {
     this.router.navigate(['questionset/questionset-list', this.pageNumber], { queryParams: this.queryParams });
   }
 
-  deleteConfirmModal(identifier): void {
-    this.currentQuestionsetId = identifier;
-    this.showDeleteConfirmationPopUp = true;
+  openDeleteDialog(templateRef, questionsetId): void {
+    this.currentQuestionsetId = questionsetId;
+    this.dialogRef = this.dialog.open(templateRef, {
+     width: '500px'
+   });
   }
 
-  delete(): void {
+  deleteQuestionset(): void {
     this.showLoader = true;
     this.helperService.deleteQuestionset(this.currentQuestionsetId).subscribe((data) => {
-      this.showDeleteConfirmationPopUp = false;
       if (data.params.status === 'successful') {
+        this.dialogRef.close();
         this.showLoader = false;
         this.questionsetList = this.removeQuestionset(this.questionsetList, this.currentQuestionsetId);
         if (this.questionsetList.length === 0) {
@@ -139,7 +143,9 @@ export class QuestionsetListComponent implements OnInit {
       }
     },
     (err) => {
+      this.dialogRef.close();
       this.showLoader = false;
+      this.toasterService.success('Something went wrong.');
     });
   }
 
@@ -148,5 +154,4 @@ export class QuestionsetListComponent implements OnInit {
       return questionsetId.indexOf(content.identifier) === -1;
     });
   }
-
 }

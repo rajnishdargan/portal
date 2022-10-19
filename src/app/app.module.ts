@@ -21,7 +21,6 @@ import { EditConfigurationComponent } from './components/edit-configuration/edit
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { SuiModule } from 'ng2-semantic-ui-v9';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { QuestionsetEditorComponent } from './components/questionset-editor/questionset-editor.component';
@@ -75,8 +74,7 @@ import { ToasterService } from '../app/services/toaster/toaster.service';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     CollectionEditorLibraryModule,
-    AppRoutingModule,
-    SuiModule
+    AppRoutingModule
   ],
   providers: [
     {
