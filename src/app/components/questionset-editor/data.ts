@@ -23,7 +23,7 @@ export const questionSetEditorConfig = {
     },
     tags: ['01309282781705830427'],
     timeDiff: 5,
-    host: '',
+    host: 'https://dev.inquiry.sunbird.org/',
     defaultLicense: 'CC BY 4.0',
     endpoint: '/data/v3/telemetry',
     env: 'questionset_editor',
