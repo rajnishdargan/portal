@@ -44,3 +44,9 @@ body {
       color: black;
   }
 }
+
+:focus-visible {
+  border: .0625rem solid #000 !important;
+  border-radius: .25rem;
+  outline: 0;
+}
