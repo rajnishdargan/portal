@@ -5,7 +5,8 @@ const devContents = {
     { id: 'do_213630162487689216137', name: 'MCQ Question Set 1', category: 'vertical' },
     { id: 'do_213633024930529280150', name: 'MCQ Question Set 2', category: 'vertical' },
     { id: 'do_213633028694933504159', name: 'Horizontal Layout QuestionSet 1', category: 'horizontal' },
-    { id: 'do_213633032251006976168', name: 'Grid layout QuestionSet 1', category: 'grid' }
+    { id: 'do_213633032251006976168', name: 'Grid layout QuestionSet 1', category: 'grid' },
+    { id: 'do_213659294092238848132', name: 'Javascript MCQ with solutions', category: 'solutions' }
   ],
   sa: [
     { id: 'do_213633042323161088177', name: 'Subjective question set 1' },
