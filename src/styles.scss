@@ -50,3 +50,11 @@ body {
   border-radius: .25rem;
   outline: 0;
 }
+
+.potrait-mode .layoutImageGrid-mcq-horizontal .quml-mcq--option .qumlImageOption .wrapper{
+  grid-template-columns:repeat(1,1fr) !important;
+}
+.potrait-mode .qumlOption-imageQaGrid .wrapper{
+  grid-template-columns:repeat(1,1fr) !important;
+
+}
