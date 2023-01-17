@@ -15,6 +15,8 @@ const BASE_URL = envVariables.BASE_URL;
 const CONTENT_PROXY_URL = envVariables.CONTENT_PROXY_URL;
 
 var app = express();
+app.use(bodyParser.json({limit: '1mb'}));
+
 app.set('port', 3000);
 app.use(express.json())
 app.use(express.static(process.cwd() + "/dist/"));
