@@ -3,14 +3,12 @@ import { Injectable } from '@angular/core';
 import { forkJoin, Observable, of, throwError } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 import { ApiEndPoints } from '../app.constant';
-import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContentService {
 
-  baseUrl: string = environment.baseUrl;
   constructor(private httpClient: HttpClient) { }
 
   // tslint:disable-next-line:typedef
@@ -31,7 +29,7 @@ export class ContentService {
   // tslint:disable-next-line:typedef
   getQuestionSet(identifier: string) {
     const hierarchy = this.httpClient.get(`${ApiEndPoints.getQuestionSetHierarchy}${identifier}`);
-    const questionSetResponse = this.httpClient.get(`${this.baseUrl}${ApiEndPoints.questionSetRead}${identifier}?fields=instructions`);
+    const questionSetResponse = this.httpClient.get(`{ApiEndPoints.questionSetRead}${identifier}?fields=instructions`);
     return (
       forkJoin([hierarchy, questionSetResponse]).pipe(map((res: any) => {
         const questionSet = res[0]?.result.questionSet;

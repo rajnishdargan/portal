@@ -38,3 +38,26 @@ body {
     height: 50% !important;
   }
 }
+
+.searchicon {
+  input:placeholder {
+    color: black;
+  }
+}
+
+:focus-visible {
+  border: 0.0625rem solid #000 !important;
+  border-radius: 0.25rem;
+  outline: 0;
+}
+
+.potrait-mode .layoutImageGrid-mcq-horizontal .quml-mcq--option .qumlImageOption .wrapper {
+  grid-template-columns: repeat(1, 1fr) !important;
+}
+.potrait-mode .qumlOption-imageQaGrid .wrapper {
+  grid-template-columns: repeat(1, 1fr) !important;
+}
+lib-editor .add-to-library .dynamic-form .sb-dropdown label,
+lib-editor .add-to-library .input-label {
+  z-index: 2 !important;
+}

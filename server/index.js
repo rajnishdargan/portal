@@ -15,6 +15,8 @@ const BASE_URL = envVariables.BASE_URL;
 const CONTENT_PROXY_URL = envVariables.CONTENT_PROXY_URL;
 
 var app = express();
+app.use(bodyParser.json({limit: '1mb'}));
+
 app.set('port', 3000);
 app.use(express.json())
 app.use(express.static(process.cwd() + "/dist/"));
@@ -76,6 +78,7 @@ app.use([
   routes.API.QUESTIONSET.REVIEW,
   routes.API.QUESTIONSET.REJECT,
   routes.API.QUESTIONSET.PUBLISH,
+  routes.API.QUESTIONSET.RETIRE,
   routes.API.ASSET.CREATE,
   routes.API.ASSET.CONTENT_UPLOAD_URL
 ], proxy(BASE_URL, {
@@ -103,13 +106,12 @@ app.use([
 
 app.use([
   routes.API.LEARNER.FRAMEWORK,
-  routes.API.LEARNER.QUESTIONSET_HIERARCHY,
-  routes.API.CHANNEL
+  routes.API.LEARNER.QUESTIONSET_HIERARCHY
 ], proxy(BASE_URL, {
   https: true,
   proxyReqPathResolver: function (req) {
-    console.log('proxyReqPathResolver ', urlHelper.parse(req.url).path);
-    return urlHelper.parse(req.url).path;
+    const originalUrl = req.originalUrl.replace("/learner/", "/api/");
+    return urlHelper.parse(originalUrl).path;
   },
   proxyReqOptDecorator: proxyUtils.decoratePublicRequestHeaders()
 }));

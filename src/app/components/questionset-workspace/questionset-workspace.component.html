@@ -9,12 +9,12 @@
         <div class="sb-sidebar-menu">
             <h3 class="font-700 mat-h3 mt-10">Question Set</h3>
             <ul *ngIf="userRole === 'creator'">
-                <li class="active mb-0" [class.active]="this.router.isActive('/questionset/create')"
-                    (click)="nagivateToPage('create')">Create</li>
+                <li class="active mb-0" routerLink="/questionset/create" routerLinkActive #rla="routerLinkActive"
+                [class.active]="rla.isActive" (click)="nagivateToPage('create')">Create</li>
             </ul>
             <ul>
-                <li class="active mb-0" [class.active]="this.router.isActive('/questionset/questionset-list')"
-                    (click)="nagivateToPage('questionset-list')">Questionset List</li>
+                <li class="active mb-0" routerLink="/questionset/questionset-list" routerLinkActive #rla="routerLinkActive"
+                [class.active]="rla.isActive" (click)="nagivateToPage('questionset-list')">Questionset List</li>
             </ul>
         </div>
     </div>

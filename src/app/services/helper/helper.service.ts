@@ -58,4 +58,16 @@ export class HelperService {
     };
     return this.actionService.post(req);
   }
+
+  deleteQuestionset(questionsetId): Observable<any> {
+    const option = {
+      url: 'questionset/v1/retire/' + questionsetId,
+      data: {
+        request: {
+          questionSet: {}
+        }
+      }
+    };
+    return this.actionService.delete(option);
+ }
 }
