@@ -1,20 +1,67 @@
-<div class="px-30 mt-20">
+<app-list-filter></app-list-filter>
+<div class="px-30 mt-20" *ngIf="showLoader">
+  <app-loader></app-loader>
+</div>
+<div class="px-30 mt-20" *ngIf="!showLoader">
   <div class="sb-table-container" *ngIf="questionsetList?.length">
     <table class="sb-table sb-table-hover">
       <thead>
         <tr>
           <th>Questionset Name</th>
-          <th>Status</th>
+          <th class="text-center">Status</th>
+          <th class="text-center"></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let questionset of questionsetList" (click)="navigateToQuestionset(questionset.identifier, questionset.status)">
-          <td>{{questionset?.name}}</td>
-          <td>{{questionset?.status}}</td>
+        <tr *ngFor="let questionset of questionsetList">
+          <td (click)="navigateToQuestionset(questionset.identifier, questionset.status)">{{questionset?.name}}</td>
+          <td class="text-center">{{questionset?.status}}</td>
+          <td class="text-center">
+            <i *ngIf="!(questionset.pkgVersion && questionset.pkgVersion > 0 && (questionset.status === 'Review' ||
+              questionset.status === 'Draft')) && (userService.userProfile.id === questionset.createdBy)" class="trash large icon"
+            tabindex="0" (click)="openDeleteDialog(template, questionset.identifier);">
+            </i>
+          </td>
         </tr>
       </tbody>
     </table>
+    <div class="py-30 ui grid">
+      <div class="two wide column"></div>
+      <div class="ten wide column">
+        <div *ngIf="questionsetList && totalCount > PAGE_LIMIT">
+          <div class="ui pagination menu my-30 right-floated" *ngIf="pager.pages.length ">
+            <a [ngClass]="{disabled:pager.currentPage===1 }" class="item " tabindex="0"
+              (click)="navigateToPage(1) ">First</a>
+            <a [ngClass]="{disabled:pager.currentPage===1 }" class="item " tabindex="0"
+              (click)="navigateToPage(pager.currentPage - 1)">Previous</a>
+            <a *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage===page}" tabindex="0"
+              (click)="navigateToPage(page)" class="item">{{page}}</a>
+            <a [ngClass]="{disabled:pager.currentPage=== pager.totalPages}" tabindex="0"
+              (click)="navigateToPage(pager.currentPage + 1)" class="item">Next</a>
+            <a [ngClass]="{disabled:pager.currentPage=== pager.totalPages}" tabindex="0"
+              (click)="navigateToPage(pager.totalPages)" class="item ">Last</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <h4 class="text-center" *ngIf="!questionsetList?.length">Questionset not available!</h4>
+  <div class="ui grid" *ngIf="!questionsetList?.length">
+    <div class="ten wide column">
+      <div class="ui two column centered grid">
+        <div class="d-flex flex-dc flex-jc-center flex-ai-center column">
+          <img alt="" src="{{'assets/images/image/erroricon.png'}}">
+          <div class="mt-16">Questionset not available</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<ng-template #template>
+  <h2 mat-dialog-title>Delete Question Set</h2>
+  <mat-dialog-content>Are you sure to delete this question set?</mat-dialog-content>
+  <mat-dialog-actions class="mat-dialog-actions mat-dialog-actions-align-end">
+    <button mat-button mat-dialog-close color="warn">No</button>
+    <button mat-button (click)="deleteQuestionset()">Yes</button>
+  </mat-dialog-actions>
+ </ng-template>

@@ -9,7 +9,7 @@ body {
 }
 
 body {
-  background: $body-background-color !important;
+  background: #e5edf5 !important;
   position: relative;
   font-family: $font-stack-en;
   letter-spacing: 0.2px;
@@ -24,7 +24,7 @@ body {
   color: #212529;
   text-align: left;
   margin: 0;
-
+  overflow-x: initial !important;
   &.pushable {
     background: $body-background-color !important;
 
@@ -59,4 +59,29 @@ body {
 
 sui-modal-dimmer{
   background: rgba(0,0,0,.5) !important;
+}
+.sb-editor-container .ck-rounded-corners .ck.ck-editor__main>.ck-editor__editable, .ck.ck-editor__main>.ck-editor__editable.ck-rounded-corners{
+  word-break: break-all !important;
+}
+figure.image-style-align-center{
+  display: table !important;
+}
+figure.image img{
+  width: auto !important;
+}
+figure.image{
+  width: auto ;
+  height: auto;
+}
+figure.image.resize-25 img{
+  width: 25% !important;
+}
+figure.image.resize-50 img{
+  width: 50% !important;
+}
+figure.image.resize-75 img{
+  width: 75% !important;
+}
+figure.image.resize-100 img{
+  width: 100% !important;
 }

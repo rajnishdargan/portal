@@ -22,12 +22,12 @@ const routes: Routes = [
         path: 'create', component: QuestionsetCreateComponent
       },
       {
-        path: 'questionset-list', component: QuestionsetListComponent
+        path: 'questionset-list/:pageNumber', component: QuestionsetListComponent
       }
     ]
   },
   {
-    path: 'edit/questionset/:id/:status', component: QuestionsetEditorComponent
+    path: 'edit/questionset/:id/:status/:state', component: QuestionsetEditorComponent
   },
   {
     path: '', component: HomeComponent
@@ -38,7 +38,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })],
+  imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload', relativeLinkResolution: 'legacy' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
