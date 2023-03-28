@@ -176,7 +176,6 @@
       }
     }
   },
-  "defaultProject": "inquiry-portal",
   "cli": {
     "analytics": false
   }
