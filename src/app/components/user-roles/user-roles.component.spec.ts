@@ -1,11 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UserRolesComponent } from './user-roles.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialogRef as MatDialogRef, MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { UserService } from 'src/app/services/user/user.service';
 import { ActionService } from '../../services/action/action.service';
 import { HttpClientModule } from '@angular/common/http';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 describe('UserRolesComponent', () => {
   let component: UserRolesComponent;

@@ -9,8 +9,8 @@ import { of } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
 import { PaginationService } from 'src/app/services/pagination/pagination.service';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { MatDialogRef, MatDialog } from '@angular/material/dialog';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatLegacyDialogRef as MatDialogRef, MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog';
 
 describe('QuestionsetListComponent', () => {
   const mockUserData = {

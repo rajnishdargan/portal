@@ -7,7 +7,7 @@ import { PaginationService } from 'src/app/services/pagination/pagination.servic
 import { IPagination } from 'src/app/interfaces/pagination';
 import { combineLatest as observableCombineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
-import {MatDialog } from '@angular/material/dialog';
+import {MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 
 import * as _ from 'lodash-es';
 @Component({
