@@ -73,6 +73,7 @@ describe('QuestionsetEditorComponent', () => {
   });
 
   it('#editorEventListener() should route to questionset', () => {
+    component.routeParams = {};
     const navigationService = TestBed.inject(NavigationService);
     spyOn(navigationService, 'goBack').and.callFake(() => {});
     spyOn(component, 'editorEventListener').and.callThrough();
