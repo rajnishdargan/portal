@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { QumlPlayerConfig } from '@project-sunbird/sunbird-quml-player/lib/quml-library-interface';
 import { Subject } from 'rxjs';
