@@ -1,5 +1,5 @@
 # Dockerfile for the inQuiry portal setup
-FROM node:14.21.2-slim
+FROM node:14.21.3-slim
 WORKDIR /app
 COPY . .
 RUN npm i
