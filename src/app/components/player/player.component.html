@@ -19,7 +19,7 @@
   </div>
   <div [ngClass]="{'portrait-mode': showPortrait}">
     <div class="b-1-100 br-2 mt-5">
-      <section *ngIf="playerConfig" class="aspectratio" data-ratio="16:9" #aspectRatio>
+      <section *ngIf="playerConfig" class="aspectratio handle-zoom" data-ratio="16:9" #aspectRatio>
         <quml-main-player [playerConfig]="playerConfig" (playerEvent)="onPlayerEvent($event)"></quml-main-player>
       </section>
     </div>
