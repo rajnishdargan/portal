@@ -1,13 +1,13 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { QumlPlayerConfig } from '@project-sunbird/sunbird-quml-player/lib/quml-library-interface';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NavigationService } from 'src/app/services/navigation.service';
 import { QuestionCursorImplementationService } from 'src/app/services/question-cursor-implementation.service';
 import { EditConfigurationComponent } from '../edit-configuration/edit-configuration.component';
 import { SamplePlayerData } from './player-data';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-player',
@@ -15,8 +15,8 @@ import { SamplePlayerData } from './player-data';
   styleUrls: ['./player.component.scss']
 })
 export class PlayerComponent implements OnInit, OnDestroy {
-
-  playerConfig: QumlPlayerConfig;
+  @ViewChild('qumlPlayer') qumlPlayer: ElementRef;
+  playerConfig: any;
   editConfig = {
     showFeedback: '',
     showSubmitConfirmation: '',
@@ -66,6 +66,32 @@ export class PlayerComponent implements OnInit, OnDestroy {
       metadata,
       data: {}
     };
+    setTimeout(() => {
+      this.loadPlayer();
+    });
+  }
+
+  loadPlayer() {
+    const playerConfig = this.playerConfig;
+
+    const qumlElement = document.createElement('sunbird-quml-player');
+    (window as any).questionListUrl = environment.baseUrl + "/api/question/v1/list";
+
+    qumlElement.setAttribute('player-config', JSON.stringify(playerConfig));
+
+    qumlElement.addEventListener('playerEvent', (event) => {
+      const customEvent: any = event;
+      if (customEvent.detail.edata.type === 'NEXT_CONTENT_PLAY') {
+        this.router.navigate(['/player', this.nextContents[0].id]);
+      }
+      console.log("On playerEvent customEvent", customEvent.detail);
+    });
+    qumlElement.addEventListener('telemetryEvent', (event) => {
+      const customEvent: any = event;
+      console.log("On telemetryEvent", customEvent.detail);
+    });
+
+    this.qumlPlayer.nativeElement.append(qumlElement);
   }
 
   setConfig(): void {
@@ -144,13 +170,6 @@ export class PlayerComponent implements OnInit, OnDestroy {
   }
   switchToLandscapeMode() {
     this.showPortrait = false;
-  }
-
-  onPlayerEvent(event) {
-    /* istanbul ignore else */
-    if (event?.edata?.type === 'NEXT_CONTENT_PLAY') {
-      this.router.navigate(['/player', this.nextContents[0].id]);
-    }
   }
 
   ngOnDestroy(): void {
