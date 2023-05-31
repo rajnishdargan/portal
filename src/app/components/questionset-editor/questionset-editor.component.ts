@@ -74,7 +74,7 @@ export class QuestionsetEditorComponent implements OnInit {
     questionsetEditorElement.addEventListener('editorEmitter', (event) => {
       const customEvent: any = event;
       console.log("On editorEvent", customEvent.detail);
-      if (customEvent.detail.action === 'backContent' || customEvent.action === 'submitContent' || customEvent.action === 'publishContent' || customEvent.action === 'rejectContent') {
+      if (customEvent.detail.action === 'backContent' || customEvent.detail.action === 'submitContent' || customEvent.detail.action === 'publishContent' || customEvent.detail.action === 'rejectContent') {
         if (_.has(this.routeParams, 'state') && this.routeParams.state === 'create') {
           this.router.navigate(['/questionset/questionset-list', 1]);
         } else {

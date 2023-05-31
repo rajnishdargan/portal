@@ -66,29 +66,27 @@ export class PlayerComponent implements OnInit, OnDestroy {
       metadata,
       data: {}
     };
-    setTimeout(() => {
-      this.loadPlayer();
-    });
+    this.loadPlayer({changeConfig: true});
   }
 
-  loadPlayer() {
+  loadPlayer(changeConfig?) {
+    if (changeConfig.changeConfig) {
+      this.qumlPlayer.nativeElement.innerHTML = '';
+    }
     const playerConfig = this.playerConfig;
-
     const qumlElement = document.createElement('sunbird-quml-player');
     (window as any).questionListUrl = environment.baseUrl + "/api/question/v1/list";
-
     qumlElement.setAttribute('player-config', JSON.stringify(playerConfig));
-
     qumlElement.addEventListener('playerEvent', (event) => {
       const customEvent: any = event;
       if (customEvent.detail.edata.type === 'NEXT_CONTENT_PLAY') {
+        this.qumlPlayer.nativeElement.innerHTML = '';
         this.router.navigate(['/player', this.nextContents[0].id]);
       }
-      console.log("On playerEvent customEvent", customEvent.detail);
     });
     qumlElement.addEventListener('telemetryEvent', (event) => {
       const customEvent: any = event;
-      console.log("On telemetryEvent", customEvent.detail);
+      console.log("telemetryEvent", customEvent.detail);
     });
 
     this.qumlPlayer.nativeElement.append(qumlElement);
