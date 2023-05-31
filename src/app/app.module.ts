@@ -7,7 +7,6 @@ import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
-import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PlayerContentListComponent } from './components/player-content-list/player-content-list.component';
@@ -56,7 +55,6 @@ import { ToasterService } from '../app/services/toaster/toaster.service';
     BrowserModule,
     CommonModule,
     HttpClientModule,
-    CarouselModule.forRoot(),
     FormsModule,
     MatToolbarModule,
     MatIconModule,
