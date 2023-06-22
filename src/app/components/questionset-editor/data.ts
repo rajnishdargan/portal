@@ -108,6 +108,6 @@ export const questionSetEditorConfig = {
     },
     contentPolicyUrl: '/term-of-use.html',
     assetProxyUrl: '/assets/public/',
-    commonFrameworkLicenseUrl: 'https://google.com'
+    commonFrameworkLicenseUrl: 'https://creativecommons.org/licenses/'
   }
 };
