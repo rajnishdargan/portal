@@ -17,7 +17,7 @@ import { environment } from '../../../environments/environment';
 export class PlayerComponent implements OnInit, OnDestroy {
   @ViewChild('qumlPlayer') qumlPlayer: ElementRef;
   playerConfig: any;
-  editConfig = {
+  editConfig: any = {
     showFeedback: '',
     showSubmitConfirmation: '',
     summaryType: '',
@@ -75,7 +75,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     }
     const playerConfig = this.playerConfig;
     const qumlElement = document.createElement('sunbird-quml-player');
-    (window as any).questionListUrl = environment.baseUrl + "/api/question/v1/list";
+    (window as any).questionListUrl = "/api/question/v2/list";
     qumlElement.setAttribute('player-config', JSON.stringify(playerConfig));
     qumlElement.addEventListener('playerEvent', (event) => {
       const customEvent: any = event;
@@ -93,10 +93,10 @@ export class PlayerComponent implements OnInit, OnDestroy {
   }
 
   setConfig(): void {
-    this.editConfig.showFeedback = this.playerConfig.metadata?.children?.every(child => child.showFeedback === 'Yes') ? 'Yes' : 'No';
+    this.editConfig.showFeedback = this.playerConfig.metadata?.children?.every(child => child.showFeedback === true) ? 'Yes' : 'No';
     this.editConfig.showSubmitConfirmation = this.playerConfig.metadata.requiresSubmit ? this.playerConfig.metadata.requiresSubmit : '';
     this.editConfig.summaryType = this.playerConfig.metadata.summaryType ? this.playerConfig.metadata.summaryType : '';
-    this.editConfig.showTimer = this.playerConfig.metadata.showTimer ? this.playerConfig.metadata.showTimer : '';
+    this.editConfig.showTimer = this.playerConfig.metadata.showTimer ? 'Yes' : 'No';
   }
 
   changeConfig(): void {
@@ -127,11 +127,11 @@ export class PlayerComponent implements OnInit, OnDestroy {
     if (result.showFeedback) {
       if (result.showFeedback === 'Yes') {
         this.playerConfig.metadata.children.forEach(child => {
-          child.showFeedback = 'Yes';
+          child.showFeedback = true;
         });
       } else {
         this.playerConfig.metadata.children.forEach(child => {
-          child.showFeedback = 'No';
+          child.showFeedback = false;
         });
       }
     }
@@ -148,14 +148,16 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
     /* istanbul ignore else */
     if (result.showTimer) {
-      this.playerConfig.metadata.showTimer = result.showTimer;
+      this.playerConfig.metadata.showTimer = result.showTimer === 'Yes' ? true: false;
 
       /* istanbul ignore else */
       if (result.showTimer === 'Yes' && !this.playerConfig.metadata.timeLimits) {
-        this.playerConfig.metadata.timeLimits = {
-          maxTime: '120',
-          warningTime: '10'
-        };
+        const timeLimits ={ 
+          questionSet: {
+            max: 120
+          }
+        }
+        this.playerConfig.metadata = {...this.playerConfig.metadata,timeLimits }
       }
     }
 

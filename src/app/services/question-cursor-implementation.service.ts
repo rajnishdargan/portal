@@ -39,13 +39,16 @@ export class QuestionCursorImplementationService {
 
   getQuestionSet(identifier: string): Observable<any> {
     const hierarchy = this.contentService.get(`${ApiEndPoints.getQuestionSetHierarchy}${identifier}`);
-    const questionSetResponse = this.contentService.get(`${ApiEndPoints.questionSetRead}${identifier}?fields=instructions`);
+    const questionSetResponse = this.contentService.get(`${ApiEndPoints.questionSetRead}${identifier}?fields=instructions,outcomeDeclaration`);
     return (
       forkJoin([hierarchy, questionSetResponse]).pipe(map((res: any) => {
-        const questionSet = res[0]?.result.questionSet;
-        const instructions = res[1].result.questionset.instructions;
+        const questionSet = res[0]?.result.questionset;
+        const { instructions, outcomeDeclaration } = res[1].result.questionset;
         if (instructions && questionSet) {
           questionSet.instructions = instructions;
+        }
+        if (outcomeDeclaration && questionSet) {
+          questionSet.outcomeDeclaration = outcomeDeclaration;
         }
         return questionSet;
       })

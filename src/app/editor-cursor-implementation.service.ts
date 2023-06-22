@@ -56,7 +56,7 @@ export class EditorCursorImplementationService {
         headers: { 'Content-Type': 'application/json' }
     };
     const requestParam = {
-      url: 'api/question/v1/list',
+      url: 'api/question/v2/list',
       data: {
         request: {
           search: {
