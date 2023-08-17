@@ -12,8 +12,8 @@ export class EditConfigurationComponent implements OnInit {
   feedbackValue: string;
   editConfigForm = this.fb.group({
     showFeedback: [true],
-    showSubmitConfirmation: [''],
-    summaryType: [''],
+    showSubmitConfirmation: ['Yes'],
+    summaryType: ['Complete'],
     showTimer: [true],
   });
   summaryTypeOptions = [

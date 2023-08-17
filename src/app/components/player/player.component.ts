@@ -7,6 +7,7 @@ import { NavigationService } from 'src/app/services/navigation.service';
 import { QuestionCursorImplementationService } from 'src/app/services/question-cursor-implementation.service';
 import { EditConfigurationComponent } from '../edit-configuration/edit-configuration.component';
 import { SamplePlayerData } from './player-data';
+import * as _ from 'lodash-es';
 import { environment } from '../../../environments/environment';
 
 @Component({
@@ -19,8 +20,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
   playerConfig: any;
   editConfig: any = {
     showFeedback: true,
-    showSubmitConfirmation: '',
-    summaryType: '',
+    showSubmitConfirmation: 'Yes',
+    summaryType: 'Complete',
     showTimer: true,
   };
   showPortrait = false;
@@ -125,7 +126,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
   updateConfig(result): void {
     /* istanbul ignore else */
-    if (result.showFeedback) {
+    if (!_.isUndefined(result.showFeedback)) {
       if (result.showFeedback === true) {
         this.playerConfig.metadata.children.forEach(child => {
           child.showFeedback = true;
@@ -148,7 +149,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     }
 
     /* istanbul ignore else */
-    if (result.showTimer) {
+    if (!_.isUndefined(result.showTimer)) {
       this.playerConfig.metadata.showTimer = result.showTimer === true ? true: false;
 
       /* istanbul ignore else */
